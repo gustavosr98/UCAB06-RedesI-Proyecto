@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // LIBRERIA PARA PUERTO SERIAL
-using System.IO.Port;
+using System.IO.Ports;
 public class Comandos : MonoBehaviour
 {
     private string strBufferIn;
@@ -17,6 +17,33 @@ public class Comandos : MonoBehaviour
         BtnConectar.Enabled = false;
         BtnEnviarDatos.Enabled = false;
          */
+    }
+
+    public void buscarPuertos(){
+        string[] puertosDisponibles = SerialPort.GetPortNames();
+        foreach (string puerto in puertosDisponibles){
+            //CboPuertos.Items.Add(puerto);
+            Debug.Log(puerto);
+        }
+            /* 
+                if (CboPuertos.Items.Count > 0)
+                {
+                    CboPuertos.SelectedItem = 0;
+                    MessageBox.Show("SELECCIONAR EL PUERTO DE TRABAJO");
+                    BtnConectar.Enabled = true;
+                }
+                else
+                {
+                    MessageBox.Show("NINGUN PUERTO DETECTADO");
+                    CboPuertos.Items.Clear();
+                    CboPuertos.Text = "                  ";
+
+                    strBufferIn = "";
+                    strBufferOut = "";
+                    BtnConectar.Enabled = false;
+                    BtnEnviarDatos.Enabled = false;
+                }
+            */
     }
 
 
