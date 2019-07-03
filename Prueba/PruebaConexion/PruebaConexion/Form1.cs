@@ -15,8 +15,21 @@ namespace PruebaConexion {
         private string strBufferIn;
         private string strBufferOut;
 
+        private delegate void DelegadoAcceso(string accion);
+
         public Form1(){
             InitializeComponent();
+        }
+
+        private void AccesoForm( string accion){
+            strBufferIn = accion;
+            TxtDatosRecibidos.Text = strBufferIn;
+        }
+
+        private void AccesoInterrupcion( string accion ){
+            DelegadoAcceso var_delegadoAcceso = new DelegadoAcceso(AccesoForm);
+            object[] arg = { accion };
+            base.Invoke(var_delegadoAcceso, arg);
         }
 
         private void Form1_Load(object sender, EventArgs e){
@@ -96,9 +109,12 @@ namespace PruebaConexion {
 
         private void DatoRecibido(object sender, SerialDataReceivedEventArgs e)
         {
-            string Data_in = SpPuertos.ReadExisting();
-            MessageBox.Show(Data_in);
-            TxtDatosRecibidos.Text = Data_in;
+            AccesoInterrupcion( SpPuertos.ReadExisting() );
+            /*
+                string Data_in = SpPuertos.ReadExisting();
+                MessageBox.Show(Data_in);
+                TxtDatosRecibidos.Text = Data_in;
+            */
         }
     }
 }
