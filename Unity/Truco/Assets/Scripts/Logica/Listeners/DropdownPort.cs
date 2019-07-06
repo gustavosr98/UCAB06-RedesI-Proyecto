@@ -8,18 +8,18 @@ using UnityEngine.UI;
 
 
 public class DropdownPort : MonoBehaviour {
-    Dropdown dropdown;
-    
+    public Comunicacion com;
+    public Dropdown dropdown;
+
+    public bool Tx;
+    public bool Rx;
+
     void Start(){
         dropdown = GetComponent<Dropdown>();
         dropdown.onValueChanged.AddListener(delegate {
             DropdownValueChanged(dropdown);
         });
 
-    }
-
-    // Update is called once per frame
-    void Update(){
     }
 
     void DropdownValueChanged(Dropdown change){

@@ -15,32 +15,32 @@ public class UI_Info : MonoBehaviour {
     public Text ronda2;
     public Text ronda3;
     
-    public void ptsAC( int x ) {
+    public void set_ptsAC( int x ) {
 
     }
 
-	public void ptsBD( int x ){
+	public void set_ptsBD( int x ){
 
     }
 		
-	public void voz( string x ){
+	public void set_voz( string x ){
         // x e { AC, BD, Ambos }
 
     }  		
     
-    public void mano( string x ){
+    public void set_mano( string x ){
         // x e { A, B, C , D}
     } 
 
-    public void ronda1( string x ){
+    public void set_ronda1( string x ){
 
     }
 
-    public void ronda2( string x ){
+    public void set_ronda2( string x ){
 
     }
 
-    public void ronda3( string x ){
+    public void set_ronda3( string x ){
 
     }
 

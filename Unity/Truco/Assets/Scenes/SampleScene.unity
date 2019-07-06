@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 148726384}
   - component: {fileID: 148726383}
   - component: {fileID: 148726382}
+  - component: {fileID: 148726385}
   m_Layer: 5
   m_Name: DropPuertos
   m_TagString: Untagged
@@ -475,6 +476,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148726380}
   m_CullTransparentMesh: 0
+--- !u!114 &148726385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148726380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8aa9d56af447714299ac8a56e2c8789, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  com: {fileID: 0}
+  dropdown: {fileID: 0}
+  Tx: 0
+  Rx: 0
 --- !u!1 &162929119
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,9 +2873,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1166494330}
-        m_MethodName: buscarPuertos
-        m_Mode: 1
+      - m_Target: {fileID: 11500000, guid: 0c0e8ae3e2ce7e2428ac8b7e6f1181ba, type: 3}
+        m_MethodName: set_name
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2915,9 +2932,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166494325}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca617b4fcf2c79340acfc913b25579f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0c0e8ae3e2ce7e2428ac8b7e6f1181ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  logica: {fileID: 0}
+  tipo: 
+  puertoTx: 
+  puertoRx: 
+  velocidad: 
 --- !u!1 &1241633784
 GameObject:
   m_ObjectHideFlags: 0

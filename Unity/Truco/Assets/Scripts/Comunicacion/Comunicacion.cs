@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,14 +8,24 @@ using System.IO.Ports;
 // LIBRERIA PARA UI
 using UnityEngine.UI;
 
-public class Comunicacion : MonoBehaviour
-{
+public class Comunicacion : MonoBehaviour {
+    public Logica logica;
+       
+
     private string strBufferIn;
     private string strBufferOut;
     SerialPort serialPort;
     private delegate void DelegadoAcceso(string accion);
 
-    void Start(){
+    // DATOS
+    public string tipo;    
+    public string puertoTx;
+    public string puertoRx;
+    public string velocidad;
+
+
+    void Start()
+    {
         strBufferIn = "";
         strBufferOut = "";
 
