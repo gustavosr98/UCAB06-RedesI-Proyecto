@@ -4,46 +4,55 @@ using UnityEngine;
 
 // LIBRERIA PARA PUERTO SERIAL
 using System.IO.Ports;
-public class Comandos : MonoBehaviour
+
+// LIBRERIA PARA UI
+using UnityEngine.UI;
+
+public class Comunicacion : MonoBehaviour
 {
     private string strBufferIn;
     private string strBufferOut;
+    SerialPort serialPort;
     private delegate void DelegadoAcceso(string accion);
 
     void Start(){
         strBufferIn = "";
         strBufferOut = "";
-        /* 
-        BtnConectar.Enabled = false;
-        BtnEnviarDatos.Enabled = false;
-         */
+
+        Button btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
+        btnEnviar.interactable = false;
     }
 
     public void buscarPuertos(){
         string[] puertosDisponibles = SerialPort.GetPortNames();
-        foreach (string puerto in puertosDisponibles){
-            //CboPuertos.Items.Add(puerto);
-            Debug.Log(puerto);
+        List<string> puertosDisponiblesList = new List<string>();
+        foreach (string puerto in puertosDisponibles) {
+            puertosDisponiblesList.Add(puerto);
         }
-            /* 
-                if (CboPuertos.Items.Count > 0)
-                {
-                    CboPuertos.SelectedItem = 0;
-                    MessageBox.Show("SELECCIONAR EL PUERTO DE TRABAJO");
-                    BtnConectar.Enabled = true;
-                }
-                else
-                {
-                    MessageBox.Show("NINGUN PUERTO DETECTADO");
-                    CboPuertos.Items.Clear();
-                    CboPuertos.Text = "                  ";
 
-                    strBufferIn = "";
-                    strBufferOut = "";
-                    BtnConectar.Enabled = false;
-                    BtnEnviarDatos.Enabled = false;
-                }
-            */
+        Dropdown dropdown = GameObject.Find("DropPuertos").GetComponent<Dropdown>();
+        dropdown.ClearOptions();
+        dropdown.AddOptions(puertosDisponiblesList);
+
+        /* 
+            if (CboPuertos.Items.Count > 0)
+            {
+                CboPuertos.SelectedItem = 0;
+                MessageBox.Show("SELECCIONAR EL PUERTO DE TRABAJO");
+                BtnConectar.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("NINGUN PUERTO DETECTADO");
+                CboPuertos.Items.Clear();
+                CboPuertos.Text = "                  ";
+
+                strBufferIn = "";
+                strBufferOut = "";
+                BtnConectar.Enabled = false;
+                BtnEnviarDatos.Enabled = false;
+            }
+        */
     }
 
 
