@@ -33,7 +33,7 @@ public class UI_Info : MonoBehaviour {
     } 
 
     public void set_ronda1( string x ){
-
+        // x e { ronda actual, por jugar, AC, BD, empate }
     }
 
     public void set_ronda2( string x ){
