@@ -7,6 +7,15 @@ using UnityEngine.UI;
 public class UI_Carta : MonoBehaviour {
 
     Button carta;
-    string pinta;
+
+    // VALOR DE LA CARTA
+    string pinta;   // { O, B, E, C }
+    int numero;     // { 1, 2 ... 12 } - { 8, 9 }
+    bool visible;   // AL REVES O AL DERECHO
+    
+    /*
+        llevar control de clickleable 
+        dentro de carta.interactable (bool)
+    */
 
 }
