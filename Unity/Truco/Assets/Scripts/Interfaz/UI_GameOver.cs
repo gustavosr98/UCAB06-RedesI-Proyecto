@@ -25,11 +25,13 @@ public class UI_GameOver : MonoBehaviour {
     }
 
     public void salir() {
+        Debug.Log("salir");
         Application.Quit();
     }
 
     public void volver() {
-        
+        Debug.Log("volver a jugar");
+
     }
 }
 
