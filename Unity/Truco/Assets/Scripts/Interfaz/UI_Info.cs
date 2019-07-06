@@ -16,7 +16,7 @@ public class UI_Info : MonoBehaviour {
     public Text ronda3;
     
     public void set_ptsAC( int x ) {
-
+        
     }
 
 	public void set_ptsBD( int x ){
