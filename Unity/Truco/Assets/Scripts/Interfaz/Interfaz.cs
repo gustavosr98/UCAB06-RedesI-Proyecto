@@ -14,4 +14,6 @@ public class Interfaz : MonoBehaviour {
         mesa = GameObject.Find("Mesa").GetComponent<UI_Mesa>();
 		info = GameObject.Find("UI_Info").GetComponent<UI_Info>();
 	}
+
+	
 }
