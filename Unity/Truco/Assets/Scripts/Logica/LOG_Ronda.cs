@@ -182,41 +182,59 @@ public class LOG_Ronda : MonoBehaviour {
         else if(log.juego.jugador == "D"){
             ui.mesa.jugador4.activarJugador();
         }
+
+
     }
 
     public void darTurno(){
         if(log.juego.jugador == "A"){
             ui.mesa.activarTurno(1);
+            activarJugadores();
             ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
             ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
             ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
         }
         else if(log.juego.jugador == "B"){
             ui.mesa.activarTurno(2);
+            activarJugadores();
             ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
             ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
             ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
         }
         else if(log.juego.jugador == "C"){
             ui.mesa.activarTurno(3);
+            activarJugadores();
             ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
             ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
             ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
 
         }
         else if(log.juego.jugador == "D"){
             ui.mesa.activarTurno(4);
+            activarJugadores();
             ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
             ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
             ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
         }
     }
 
 
-    public void jugarCarta_e(){
+    public void jugarCarta(){
         // YUCA
-        revisarMasFuerte();
-        // ui.bloquearJugador("")
+        //revisarMasFuerte();
+        
     }
 
     public void jugar(){

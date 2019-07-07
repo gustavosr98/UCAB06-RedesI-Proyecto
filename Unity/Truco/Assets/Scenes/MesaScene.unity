@@ -503,7 +503,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1332668623}
-        m_MethodName: mostrarTablero
+        m_MethodName: darTurno
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
