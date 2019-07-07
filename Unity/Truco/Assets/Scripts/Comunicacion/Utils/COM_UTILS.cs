@@ -33,6 +33,8 @@ public static class COM_UTILS {
             return "010";
         else if ( emisor == "D")
             return "011";
+
+        return null;
     }
 
     public static string Carta(string carta){
@@ -121,6 +123,7 @@ public static class COM_UTILS {
         else if (carta == "Perico") 
             return "1111OO";
 
+        return null;
     }
 
     public static string Equipo(string equipo){
@@ -128,6 +131,8 @@ public static class COM_UTILS {
             return "0";
         else if ( equipo == "BD")
             return "1";
+
+        return null;
     }
     
     public static string Canto(string canto){
@@ -135,49 +140,51 @@ public static class COM_UTILS {
             return "0";
         else if ( canto == "Envido")
             return "1";
+
+        return null;
     }
 
     // MENSAJES
-    public static string JUGAR_CARTA = "00000001"; 
-    public static string JUGAR_CARTA(string E, string carta, ){
+    public static string c_JUGAR_CARTA = "00000001"; 
+    public static string JUGAR_CARTA(string e, string carta){
         // TT(8) E(3) D(3) Carta(6)
         return string.Format("{0}{1}{2}{3}", 
-            JUGAR_CARTA,
-            E(E),
+            c_JUGAR_CARTA,
+            E(e),
             "111",
             Carta(carta)
         );
     }
 
-    public static string PEDIR_CANTO = "00000010"; 
-    public static string PEDIR_CANTO(string E, string D, string equipo, string canto){
+    public static string c_PEDIR_CANTO = "00000010"; 
+    public static string PEDIR_CANTO(string e, string D, string equipo, string canto){
         // TT(8) E(3) D(3) Equipo(1) Canto(1)
         return string.Format("{0}{1}{2}{3}{4}", 
-            PEDIR_CANTO,
-            E(E),
+            c_PEDIR_CANTO,
+            E(e),
             E(D),
             Equipo(equipo),
             Canto(canto)
         );
     }
 
-    public static string RESPONDER_CANTO = "00000011"; 
-    public static string RESPONDER_CANTO(string E, string D, string canto, bool resp){
+    public static string c_RESPONDER_CANTO = "00000011"; 
+    public static string RESPONDER_CANTO(string e, string D, string canto, bool resp){
         // TT(8) E(3) D(3) Equipo(1) Respuesta(1)
         return string.Format("{0}{1}{2}{3}{4}", 
-            RESPONDER_CANTO,
-            E(E),
+            c_RESPONDER_CANTO,
+            E(e),
             E(D),
             Canto(canto),
             resp ? "1" : "0"
         );
     }
 
-    public static string REPARTIENDO_CARTAS = "00000100"; 
+    public static string c_REPARTIENDO_CARTAS = "00000100"; 
     public static string REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3, string vira){
         // TT(8) E(3) D(3) C1(6), C2, C3, Vira
         return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
-            REPARTIENDO_CARTAS,
+            c_REPARTIENDO_CARTAS,
             E("A"),
             E(D),
             Carta(carta1),
@@ -187,11 +194,11 @@ public static class COM_UTILS {
         );
     }
 
-    public static string ELLOS_TIENEN_FLOR = "00000101"; 
+    public static string c_ELLOS_TIENEN_FLOR = "00000101"; 
     public static string ELLOS_TIENEN_FLOR(bool florA, bool florB, bool florC, bool florD){
         // TT(8) E(3) D(3) FlorA(1), FlorB, FlorC, FlorD
         return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
-            REPARTIENDO_CARTAS,
+            c_REPARTIENDO_CARTAS,
             E("A"),
             "111",
             florA ? "1" : "0",
