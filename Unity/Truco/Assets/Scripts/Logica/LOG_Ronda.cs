@@ -11,6 +11,12 @@ public class LOG_Ronda : MonoBehaviour {
     public Interfaz ui;
     public string pinta;
     public int numero;
+
+    public UI_Carta cartaFuerte;
+
+    public bool empate;
+
+
     
     System.Random aleatorio = new System.Random();
     /* 
@@ -24,9 +30,6 @@ public class LOG_Ronda : MonoBehaviour {
     */
 
 
-    public void revisarMasFuerte(){
-
-    }
     public List<Carta> cartas = new List<Carta>();
 
     void Start() {
@@ -41,6 +44,15 @@ public class LOG_Ronda : MonoBehaviour {
         ui.mesa.jugador3.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,1);} );
         ui.mesa.jugador3.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,2);} );
         ui.mesa.jugador3.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
+    }
+
+    public void revisarMasFuerte(UI_Carta carta){
+        if(!cartaFuerte){
+            cartaFuerte = carta;
+        }
+        else{
+            //if(Carta.duelo(carta.numero,carta.pinta,cartaFuerte.numero,cartaFuerte.pinta,))
+        }
     }
 
     public void crearArray() {
@@ -245,6 +257,7 @@ public class LOG_Ronda : MonoBehaviour {
             if(carta == 1){
                 pinta = ui.mesa.jugador1.carta1.pinta;
                 numero = ui.mesa.jugador1.carta1.numero;
+                revisarMasFuerte(ui.mesa.jugador1.carta1);
                 //mandar por com
             }
             else if(carta == 2){
@@ -286,13 +299,23 @@ public class LOG_Ronda : MonoBehaviour {
                 numero = ui.mesa.jugador3.carta3.numero;
             }
         }
+        else if(jugador == 4){
+            if(carta == 1){
+                pinta = ui.mesa.jugador4.carta1.pinta;
+                numero = ui.mesa.jugador4.carta1.numero;
+                //mandar por com
+            }
+            else if(carta == 2){
+                pinta = ui.mesa.jugador4.carta2.pinta;
+                numero = ui.mesa.jugador4.carta2.numero;
+            }
+            else if(carta == 3){
+                pinta = ui.mesa.jugador4.carta3.pinta;
+                numero = ui.mesa.jugador4.carta3.numero;
+            }
+        }
         ui.mesa.desactivarTurno(jugador);
         
     }
-
-    public void jugar(){
-
-    }
-
 
 }

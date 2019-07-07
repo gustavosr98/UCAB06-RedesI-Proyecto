@@ -20,6 +20,8 @@ public class LOG_Partida : MonoBehaviour {
     public string ronda2 = "Por jugar";
     public string ronda3 = "Por jugar";
 
+    public UI_Vira vira = new UI_Vira();
+
     void Start(){
         // com = GameObject.Find("TODAVIA NO RECUERDO").GetComponent<Comunicacion>();
     }
