@@ -38,15 +38,9 @@ public class UI_Apuestas : MonoBehaviour{
         BtnEnvidoNo = GameObject.Find("BtnEnvidoNo").GetComponent<Button>();
         BtnEnvidoNo.GetComponentInChildren<Text>().text = "No";
         BtnEnvidoNo.interactable = false;
-
-        activarTruco();
-        activarBtnTrucoSi();
-        activarBtnTrucoNo();
-        activarBtnEnvidoNo();
-        activarBtnEnvidoSi();
-        activarEnvido();
         
     }
+ }
 
     public void set_string_BtnTruco(string x){
         //x e {truco, retruco, vale 9, vale juego}
