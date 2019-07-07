@@ -16,7 +16,7 @@ public class LOG_Juego : MonoBehaviour {
 
     }
 
-    public void terminarJuego(){
+    public void terminarJuego(string ganador){
 
     }
 
