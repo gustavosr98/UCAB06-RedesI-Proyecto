@@ -13,7 +13,5 @@ public class Interfaz : MonoBehaviour {
         mesa = GameObject.Find("Mesa").GetComponent<UI_Mesa>();
 	}
 
-	void Start(){
-		Carta.prueba2();
-	}
+	
 }
