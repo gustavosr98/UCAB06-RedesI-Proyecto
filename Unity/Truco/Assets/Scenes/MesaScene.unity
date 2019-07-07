@@ -503,7 +503,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1332668623}
-        m_MethodName: repartirCartasAleatorio
+        m_MethodName: darTurno
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1431,6 +1431,7 @@ GameObject:
   - component: {fileID: 1332668624}
   - component: {fileID: 1332668625}
   - component: {fileID: 1332668623}
+  - component: {fileID: 1332668626}
   m_Layer: 0
   m_Name: Logica
   m_TagString: Untagged
@@ -1484,6 +1485,22 @@ MonoBehaviour:
   ronda: {fileID: 0}
   partida: {fileID: 0}
   juego: {fileID: 0}
+--- !u!114 &1332668626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332668622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8ba1010cca80dd42942a55b5ef495fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jugador: A
+  ptsAC: 0
+  ptsBD: 0
+  ganador: 
 --- !u!1 &1375532895
 GameObject:
   m_ObjectHideFlags: 0

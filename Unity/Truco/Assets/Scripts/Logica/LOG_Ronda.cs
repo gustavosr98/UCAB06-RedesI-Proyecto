@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class LOG_Ronda : MonoBehaviour {
     public Logica log;
     public Comunicacion com;
     public Interfaz ui;
+    public string pinta;
+    public int numero;
     
     System.Random aleatorio = new System.Random();
     /* 
@@ -19,6 +23,7 @@ public class LOG_Ronda : MonoBehaviour {
         public UI_Carta carta4
     */
 
+
     public void revisarMasFuerte(){
 
     }
@@ -27,6 +32,15 @@ public class LOG_Ronda : MonoBehaviour {
     void Start() {
         ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
         log = GameObject.Find("Logica").GetComponent<Logica>();
+        ui.mesa.jugador1.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(1,1);} );
+        ui.mesa.jugador1.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(1,2);} );
+        ui.mesa.jugador1.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(1,3);} );
+        ui.mesa.jugador2.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(2,1);} );
+        ui.mesa.jugador2.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(2,2);} );
+        ui.mesa.jugador2.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(2,3);} );
+        ui.mesa.jugador3.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,1);} );
+        ui.mesa.jugador3.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,2);} );
+        ui.mesa.jugador3.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
     }
 
     public void crearArray() {
@@ -121,9 +135,6 @@ public class LOG_Ronda : MonoBehaviour {
         return carta;
     }
     
-    IEnumerator Esperar(int x){
-        yield return new WaitForSeconds(x);
-    }
 
     public void repartirCartasAleatorio(){
         Carta carta;
@@ -163,10 +174,120 @@ public class LOG_Ronda : MonoBehaviour {
         */
     }
 
-    public void jugarCarta_e(){
-        // YUCA
-        revisarMasFuerte();
-        // ui.bloquearJugador("")
+    public void activarJugadores(){
+        /*
+            com.ronda.darCartas("A",
+                ui.mesa.jugador1.carta1.pinta, ui.mesa.jugador1.carta1.numero,
+                ui.mesa.jugador1.carta2.pinta, ui.mesa.jugador1.carta2.numero,
+                ui.mesa.jugador1.carta3.pinta, ui.mesa.jugador1.carta3.numero
+            )
+            com.ronda.darCartas("B"...)
+        */
+        if(log.juego.jugador == "A"){
+            ui.mesa.jugador1.activarJugador();
+        }
+        else if(log.juego.jugador == "B"){
+            ui.mesa.jugador2.activarJugador();
+        }
+        else if(log.juego.jugador == "C"){
+            ui.mesa.jugador3.activarJugador();
+        }
+        else if(log.juego.jugador == "D"){
+            ui.mesa.jugador4.activarJugador();
+        }
+
+
+    }
+
+    public void darTurno(){
+        if(log.juego.jugador == "A"){
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
+            ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
+            ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
+            ui.mesa.activarTurno(1);
+        }
+        else if(log.juego.jugador == "B"){
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
+            ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
+            ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
+            ui.mesa.activarTurno(2);
+        }
+        else if(log.juego.jugador == "C"){
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
+            ui.mesa.desactivarTurno(4);
+            ui.mesa.jugador4.bloquearCartas();
+            ui.mesa.activarTurno(3);
+        }
+        else if(log.juego.jugador == "D"){
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.jugador1.bloquearCartas();
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.jugador2.bloquearCartas();
+            ui.mesa.desactivarTurno(3);
+            ui.mesa.jugador3.bloquearCartas();
+            ui.mesa.activarTurno(4);
+        }
+        activarJugadores();
+    }
+
+
+    public void jugarCarta(int jugador,int carta){
+        if(jugador == 1){
+            if(carta == 1){
+                pinta = ui.mesa.jugador1.carta1.pinta;
+                numero = ui.mesa.jugador1.carta1.numero;
+                //mandar por com
+            }
+            else if(carta == 2){
+                pinta = ui.mesa.jugador1.carta2.pinta;
+                numero = ui.mesa.jugador1.carta2.numero;
+            }
+            else if(carta == 3){
+                pinta = ui.mesa.jugador1.carta3.pinta;
+                numero = ui.mesa.jugador1.carta3.numero;
+            }
+        }
+        else if(jugador == 2){
+            if(carta == 1){
+                pinta = ui.mesa.jugador2.carta1.pinta;
+                numero = ui.mesa.jugador2.carta1.numero;
+                //mandar por com
+            }
+            else if(carta == 2){
+                pinta = ui.mesa.jugador2.carta2.pinta;
+                numero = ui.mesa.jugador2.carta2.numero;
+            }
+            else if(carta == 3){
+                pinta = ui.mesa.jugador2.carta3.pinta;
+                numero = ui.mesa.jugador2.carta3.numero;
+            }
+        }
+        else if(jugador == 3){
+            if(carta == 1){
+                pinta = ui.mesa.jugador3.carta1.pinta;
+                numero = ui.mesa.jugador3.carta1.numero;
+                //mandar por com
+            }
+            else if(carta == 2){
+                pinta = ui.mesa.jugador3.carta2.pinta;
+                numero = ui.mesa.jugador3.carta2.numero;
+            }
+            else if(carta == 3){
+                pinta = ui.mesa.jugador3.carta3.pinta;
+                numero = ui.mesa.jugador3.carta3.numero;
+            }
+        }
+        ui.mesa.desactivarTurno(jugador);
+        
     }
 
     public void jugar(){
