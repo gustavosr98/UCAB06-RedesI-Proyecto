@@ -10,6 +10,8 @@ public class UI_Apuestas : MonoBehaviour{
 
     public bool cond;
     public string trucoActual = "Normal";
+    public bool truco = false;
+    public bool envido = false;
     public string vozActual = "Ambos";
 
     void Start(){
@@ -17,10 +19,12 @@ public class UI_Apuestas : MonoBehaviour{
         BtnTruco.interactable = false;
         BtnTruco.GetComponentInChildren<Text>().text = "Truco";
         set_string_BtnTruco("Truco");
+        BtnTruco.onClick.AddListener(tru);
 
         BtnEnvido = GameObject.Find("BtnEnvido").GetComponent<Button>();
         BtnEnvido.GetComponentInChildren<Text>().text = "Envido";
         BtnEnvido.interactable = false;
+        BtnEnvido.onClick.AddListener(env);
 
         BtnTrucoSi = GameObject.Find("BtnTrucoSi").GetComponent<Button>();
         BtnTrucoSi.GetComponentInChildren<Text>().text = "Si";
@@ -35,11 +39,29 @@ public class UI_Apuestas : MonoBehaviour{
         BtnEnvidoSi = GameObject.Find("BtnEnvidoSi").GetComponent<Button>();
         BtnEnvidoSi.GetComponentInChildren<Text>().text = "Si";
         BtnEnvidoSi.interactable = false;
+        BtnEnvidoSi.onClick.AddListener(aceptarEnvido);
 
         BtnEnvidoNo = GameObject.Find("BtnEnvidoNo").GetComponent<Button>();
         BtnEnvidoNo.GetComponentInChildren<Text>().text = "No";
         BtnEnvidoNo.interactable = false;
+        BtnEnvidoNo.onClick.AddListener(rechazarEnvido);
         
+    }
+
+    public void tru() {
+        truco = true;
+    }
+
+    public void env() {
+        envido = true;
+    }
+
+    public void aceptarEnvido() {
+        envido = true;
+    }
+
+    public void rechazarEnvido() {
+        envido = false;
     }
 
     public void set_string_BtnTruco(string x){

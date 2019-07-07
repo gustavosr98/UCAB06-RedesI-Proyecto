@@ -7,6 +7,7 @@ public class LOG_Partida : MonoBehaviour {
     Comunicacion com;
     Interfaz ui;
     Logica log;
+    Carta carta;
     
     // DATOS DEL PARTIDA 
     public string nivelTruco = "Normal";
@@ -15,16 +16,62 @@ public class LOG_Partida : MonoBehaviour {
     public string mano = "B";
 
     public bool envido = false;
-
+    public string vozActual = "Ambos";
     public string ronda1 = "Ronda actual";
     public string ronda2 = "Por jugar";
     public string ronda3 = "Por jugar";
 
+    public int ac = 0;
+    public int bd = 0;
+
     void Start(){
         // com = GameObject.Find("TODAVIA NO RECUERDO").GetComponent<Comunicacion>();
+        subirApuesta();
     }
 
     // METODOS 
+
+    public void calcularEnvido() {
+        int ganador1 = carta.envido(ui.mesa.jugador1.carta1.numero, ui.mesa.jugador1.carta1.pinta,
+                                    ui.mesa.jugador1.carta2.numero, ui.mesa.jugador1.carta2.pinta,
+                                    ui.mesa.jugador1.carta3.numero, ui.mesa.jugador1.carta3.pinta,
+                                    ui.mesa.jugador2.carta1.numero, ui.mesa.jugador2.carta1.pinta,
+                                    ui.mesa.jugador2.carta2.numero, ui.mesa.jugador2.carta2.pinta,
+                                    ui.mesa.jugador2.carta3.numero, ui.mesa.jugador2.carta3.pinta, );
+
+        int ganador2 = carta.envido(ui.mesa.jugador3.carta1.numero, ui.mesa.jugador3.carta1.pinta,
+                                    ui.mesa.jugador3.carta2.numero, ui.mesa.jugador3.carta2.pinta,
+                                    ui.mesa.jugador3.carta3.numero, ui.mesa.jugador3.carta3.pinta,
+                                    ui.mesa.jugador4.carta1.numero, ui.mesa.jugador4.carta1.pinta,
+                                    ui.mesa.jugador4.carta2.numero, ui.mesa.jugador4.carta2.pinta,
+                                    ui.mesa.jugador4.carta3.numero, ui.mesa.jugador4.carta3.pinta, );
+
+        UI_Jugador gan1, gan2, ganador;
+        if(ganador1 == -1) {
+            gan1 = ui.mesa.jugador1;
+        } else {
+            gan1 = ui.mesa.jugador2;
+        }
+        if(ganador2 == -1) {
+            gan2 = ui.mesa.jugador3;
+        } else {
+            gan2 = ui.mesa.jugador4;
+        }
+        int ganadorTotal = carta.envido(gan1.carta1.numero, gan1.carta1.pinta,
+                                        gan1.carta2.numero, gan1.carta2.pinta,
+                                        gan1.carta3.numero, gan1.carta3.pinta,
+                                        gan2.carta1.numero, gan2.carta1.pinta,
+                                        gan2.carta2.numero, gan2.carta2.pinta,
+                                        gan2.carta3.numero, gan2.carta3.pinta, );
+
+        if(ganadorTotal == 1) {
+            ganador = gan2;
+        } else if(ganadorTotal == -1) {
+            ganador = gan1;
+        } else {
+            //empate
+        }
+    }
 
     public void terminarPartida(int ac , int bd){
         // com.enviar(DAR_PUNTOS_PARTIDA)
@@ -34,10 +81,10 @@ public class LOG_Partida : MonoBehaviour {
             log.juego.ptsAC += ac 
             log.juego.ptsBD += bd
         */
-        ui.info.set_ptsAC( ac );
-        ui.info.set_ptsBD( bd );
-        log.juego.ptsAC += ac;
-        log.juego.ptsBD += bd;
+        ui.info.set_ptsAC( this.ac + ac );
+        ui.info.set_ptsBD( this.bd + bd );
+        log.juego.ptsAC += this.ac + ac;
+        log.juego.ptsBD += this.bd + bd;
         // REINICIAR DATOS DE PARTIDA
 
         if ( log.juego.ptsAC >= 24 ){
@@ -69,12 +116,48 @@ public class LOG_Partida : MonoBehaviour {
         }
     }
 
-    public void actualizarVoz(string voz){
-        ui.info.set_voz(voz);
+    public void subirApuesta() {
+        if(log.juego.jugador == "A" && ui.mesa.btnTurno1.interactable == true) {
+            ui.apuesta.activarTruco();
+            ui.apuesta.activarBtnTrucoSi();
+            ui.apuesta.activarBtnTrucoNo();
+            ui.apuesta.activarEnvido();
+            ui.apuesta.activarBtnEnvidoSi();
+            ui.apuesta.activarBtnEnvidoNo();
+            vozActual = "AC";
+        } else if (log.juego.jugador == "B" && ui.mesa.btnTurno2.interactable == true) {
+            ui.apuesta.activarTruco();
+            ui.apuesta.activarBtnTrucoSi();
+            ui.apuesta.activarBtnTrucoNo();
+            ui.apuesta.activarEnvido();
+            ui.apuesta.activarBtnEnvidoSi();
+            ui.apuesta.activarBtnEnvidoNo();
+            vozActual = "BD";
+        } else if (log.juego.jugador == "C" && ui.mesa.btnTurno3.interactable == true) {
+            ui.apuesta.activarTruco();
+            ui.apuesta.activarBtnTrucoSi();
+            ui.apuesta.activarBtnTrucoNo();
+            ui.apuesta.activarEnvido();
+            ui.apuesta.activarBtnEnvidoSi();
+            ui.apuesta.activarBtnEnvidoNo();
+            vozActual = "A9";
+        } else if (log.juego.jugador == "D" && ui.mesa.btnTurno4.interactable == true) {
+            ui.apuesta.activarTruco();
+            ui.apuesta.activarBtnTrucoSi();
+            ui.apuesta.activarBtnTrucoNo();
+            ui.apuesta.activarEnvido();
+            ui.apuesta.activarBtnEnvidoSi();
+            ui.apuesta.activarBtnEnvidoNo();
+            vozActual = "BD";
+        }
     }
 
-    public void actualizarEnvido(bool envido) {
-        if(envido) {
+    public void actualizarVoz(){
+        ui.info.set_voz(vozActual);
+    }
+
+    public void actualizarEnvido() {
+        if(ui.apuesta.envido) {
             ui.info.set_envido("Si");
         } else {
             ui.info.set_envido("No");
@@ -92,5 +175,7 @@ public class LOG_Partida : MonoBehaviour {
     public void actualizarRonda3(string ronda3) {
         ui.info.set_ronda3(ronda3);
     }
+
+
     
 }

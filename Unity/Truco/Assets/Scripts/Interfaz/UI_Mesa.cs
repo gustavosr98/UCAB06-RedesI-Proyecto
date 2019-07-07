@@ -37,6 +37,16 @@ public class UI_Mesa : MonoBehaviour{
         instanciarJugador(0     ,550    ,3);
         instanciarJugador(-1000 ,0      ,4);
 
+        desactivarTurno(1);
+        desactivarTurno(2);
+        desactivarTurno(3);
+        desactivarTurno(4);
+
+        desactivarFlor(1);
+        desactivarFlor(2);
+        desactivarFlor(3);
+        desactivarFlor(4);
+
     }
 
     public void reiniciarJuego() {
