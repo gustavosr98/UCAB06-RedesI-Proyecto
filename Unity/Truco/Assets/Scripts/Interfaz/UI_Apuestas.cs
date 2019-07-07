@@ -40,7 +40,6 @@ public class UI_Apuestas : MonoBehaviour{
         BtnEnvidoNo.interactable = false;
         
     }
- }
 
     public void set_string_BtnTruco(string x){
         //x e {truco, retruco, vale 9, vale juego}
