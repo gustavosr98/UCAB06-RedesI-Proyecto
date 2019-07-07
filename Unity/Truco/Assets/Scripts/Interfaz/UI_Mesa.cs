@@ -36,23 +36,31 @@ public class UI_Mesa : MonoBehaviour{
         instanciarJugador(1000  ,0      ,2);
         instanciarJugador(0     ,550    ,3);
         instanciarJugador(-1000 ,0      ,4);
+
+        jugador1.jugarCarta(1,1);
+        jugador2.jugarCarta(2,1);
+        jugador3.jugarCarta(3,1);
+        jugador4.jugarCarta(4,1);
+
+        reiniciarJuego();
+
     }
 
     public void reiniciarJuego() {
-        jugador1.jugarCarta(1,-250,0,true); 
-        jugador2.jugarCarta(1,-250,0,true);
-        jugador3.jugarCarta(1,-250,0,true);
-        jugador4.jugarCarta(1,-250,0,true);
+        jugador1.reiniciarJuego(1); 
+        jugador2.reiniciarJuego(1);
+        jugador3.reiniciarJuego(1);
+        jugador4.reiniciarJuego(1);
 
-        jugador1.jugarCarta(2,0,0,true); 
-        jugador2.jugarCarta(2,0,0,true);
-        jugador3.jugarCarta(2,0,0,true);
-        jugador4.jugarCarta(2,0,0,true);
+        jugador1.reiniciarJuego(2); 
+        jugador2.reiniciarJuego(2);
+        jugador3.reiniciarJuego(2);
+        jugador4.reiniciarJuego(2);
 
-        jugador1.jugarCarta(3,250,0,true); 
-        jugador2.jugarCarta(3,250,0,true);
-        jugador3.jugarCarta(3,250,0,true);
-        jugador4.jugarCarta(3,250,0,true);
+        jugador1.reiniciarJuego(3); 
+        jugador2.reiniciarJuego(3);
+        jugador3.reiniciarJuego(3);
+        jugador4.reiniciarJuego(3);
     }
 
     public void instanciarJugador(float x, float y, int jugador) {
