@@ -145,24 +145,8 @@ public class Comunicacion : MonoBehaviour {
             throw;
         }
     }
-
-    // RECIBIR DATOS
-    /* 
-    private delegate void DelegadoAcceso( string accion );
-    private void AccesoForm( string accion ){
-        strBufferIn = accion;
-        inRecibido.text = strBufferIn;
-    }
-    private void AccesoInterrupcion( string accion ){
-        DelegadoAcceso delegadoObj = new DelegadoAcceso(AccesoForm);
-        object[] arg = { accion };
-        delegadoObj.DynamicInvoke( arg );
-    }
-    private void DatoRecibido(object sender, SerialDataReceivedEventArgs e){
-        AccesoInterrupcion( puertoA.ReadExisting() );
-    }
-    */
     
+    // RECIBIR DATOS
     void Update(){
         try {
             if (puertoB.IsOpen){
@@ -175,15 +159,4 @@ public class Comunicacion : MonoBehaviour {
         } catch (System.Exception ex) { }
     }
 
-        // OPCION 2
-        /*
-        void Update()
-        {
-            if (puertoA.IsOpen && puertoA.BytesToRead >= 8) {
-                Debug.Log(puertoA.ReadLine());
-            }
-        }
-        */
-
-
-    }
+}
