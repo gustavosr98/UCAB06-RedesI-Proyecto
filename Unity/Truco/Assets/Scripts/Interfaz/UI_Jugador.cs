@@ -134,13 +134,6 @@ public class UI_Jugador : MonoBehaviour{
         switch(jugador) {
             case 1: posicion.x = 0;
                     posicion.y = -200;
-                    if(cont1==1){
-                        posicion.z = -400;
-                    }
-                    else if(cont1 == 2) {
-                        posicion.z = -800;
-                    }
-                    cont1++;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
