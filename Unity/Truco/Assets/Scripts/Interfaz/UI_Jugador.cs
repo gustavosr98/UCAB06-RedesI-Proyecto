@@ -65,6 +65,12 @@ public class UI_Jugador : MonoBehaviour{
         carta3.darValor(pinta3, numero3);
     }
 
+    public void bloquearCartas() {
+        carta1.desactivarCarta();
+        carta2.desactivarCarta();
+        carta3.desactivarCarta();
+    }
+
     public void activarJugador(){
         carta1.mostrarCarta();
         carta2.mostrarCarta();
@@ -73,6 +79,16 @@ public class UI_Jugador : MonoBehaviour{
         carta2.activarCarta();
         carta3.activarCarta();
     }
+
+    public void desactivarJugador(){
+        carta1.noMostrarCarta();
+        carta2.noMostrarCarta();
+        carta3.noMostrarCarta();
+        carta1.desactivarCarta();
+        carta2.desactivarCarta();
+        carta3.desactivarCarta();
+    }
+
     public void reiniciarJuego(int carta) {
         Debug.Log("UI_Jugador.reiniciarJuego()");
         switch(carta) {
