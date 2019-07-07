@@ -57,26 +57,41 @@ public class UI_Jugador : MonoBehaviour{
     }
 
 
-    public void jugarCarta( int carta, float x, float y ){
+    public void jugarCarta( int carta, float x, float y, bool reiniciar ){
         Debug.Log("UI_Jugador.jugarCarta()");
         switch(carta) {
             case 1: posicion.x += x;
                     posicion.y += y;
                     goCarta1.transform.position = posicion;
-                    carta1.mostrarCarta();
-                    carta1.desactivarCarta();
+                    if (reiniciar) {
+                        carta1.noMostrarCarta();
+                        carta1.activarCarta();
+                    } else {
+                        carta1.mostrarCarta();
+                        carta1.desactivarCarta();
+                    }
                     break;
             case 2: posicion.x += x;
                     posicion.y += y;
                     goCarta2.transform.position = posicion;
-                    carta2.mostrarCarta();
-                    carta2.desactivarCarta();
+                    if (reiniciar) {
+                        carta2.noMostrarCarta();
+                        carta2.activarCarta();
+                    } else {
+                        carta2.mostrarCarta();
+                        carta2.desactivarCarta();
+                    }
                     break;
             case 3: posicion.x += x;
                     posicion.y += y;
                     goCarta3.transform.position = posicion;
-                    carta3.mostrarCarta();
-                    carta3.desactivarCarta();
+                    if (reiniciar) {
+                        carta3.noMostrarCarta();
+                        carta3.activarCarta();
+                    } else {
+                        carta3.mostrarCarta();
+                        carta3.desactivarCarta();
+                    }
                     break;
         }
     }
