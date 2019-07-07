@@ -38,13 +38,6 @@ public class UI_Apuestas : MonoBehaviour{
         BtnEnvidoNo = GameObject.Find("BtnEnvidoNo").GetComponent<Button>();
         BtnEnvidoNo.GetComponentInChildren<Text>().text = "No";
         BtnEnvidoNo.interactable = false;
-
-        activarTruco();
-        activarBtnTrucoSi();
-        activarBtnTrucoNo();
-        activarBtnEnvidoNo();
-        activarBtnEnvidoSi();
-        activarEnvido();
         
     }
 

@@ -1402,7 +1402,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925247cdb80acc04fa80712bd924a1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BtnTruco: {fileID: 0}
   BtnTrucoSi: {fileID: 784472701}
+  BtnTrucoNo: {fileID: 0}
+  BtnEnvido: {fileID: 0}
+  BtnEnvidoSi: {fileID: 0}
+  BtnEnvidoNo: {fileID: 0}
 --- !u!1 &1835565177
 GameObject:
   m_ObjectHideFlags: 0
