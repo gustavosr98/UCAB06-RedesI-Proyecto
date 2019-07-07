@@ -41,6 +41,23 @@ public class UI_Mesa : MonoBehaviour{
         jugador4.jugarCarta(1,350,0);
     }
 
+    public void reiniciarJuego() {
+        jugador1.jugarCarta(1,-250,350); 
+        jugador2.jugarCarta(1,-850,0);
+        jugador3.jugarCarta(1,-250,-350);
+        jugador4.jugarCarta(1,350,0);
+
+        jugador1.jugarCarta(2,-250,350); 
+        jugador2.jugarCarta(2,-850,0);
+        jugador3.jugarCarta(2,-250,-350);
+        jugador4.jugarCarta(2,350,0);
+
+        jugador1.jugarCarta(3,-250,350); 
+        jugador2.jugarCarta(3,-850,0);
+        jugador3.jugarCarta(3,-250,-350);
+        jugador4.jugarCarta(3,350,0);
+    }
+
     public void instanciarJugador(float x, float y, int jugador) {
         Debug.Log("UI_Mesa.instanciarJugador()");
         switch(jugador) {
@@ -51,9 +68,9 @@ public class UI_Mesa : MonoBehaviour{
                     posicion.y += y;
                     goJugador1.transform.position = posicion;
                     jugador1 = goJugador1.GetComponent<UI_Jugador>();
-                    jugador1.instanciarCarta(-250,0,1,"O",2);
-                    jugador1.instanciarCarta(0,0,2,"C",10);
-                    jugador1.instanciarCarta(250,0,3,"E",1);
+                    jugador1.instanciarCarta(-250,0,1);
+                    jugador1.instanciarCarta(0,0,2);
+                    jugador1.instanciarCarta(250,0,3);
                     btnTurno1 = GameObject.Find("BtnTurno1").GetComponent<Button>();
                     btnFlor1 = GameObject.Find("BtnFlor1").GetComponent<Button>();
                     break;
@@ -64,9 +81,9 @@ public class UI_Mesa : MonoBehaviour{
                     posicion.y += y;
                     goJugador2.transform.position = posicion;
                     jugador2 = goJugador2.GetComponent<UI_Jugador>();
-                    jugador2.instanciarCarta(-250,0,1,"C",12);
-                    jugador2.instanciarCarta(0,0,2,"B",11);
-                    jugador2.instanciarCarta(250,0,3,"E",4);
+                    jugador2.instanciarCarta(-250,0,1);
+                    jugador2.instanciarCarta(0,0,2);
+                    jugador2.instanciarCarta(250,0,3);
                     btnTurno2 = GameObject.Find("BtnTurno2").GetComponent<Button>();
                     btnFlor2 = GameObject.Find("BtnFlor2").GetComponent<Button>();
                     break;
@@ -77,9 +94,9 @@ public class UI_Mesa : MonoBehaviour{
                     posicion.y += y;
                     goJugador3.transform.position = posicion;
                     jugador3 = goJugador3.GetComponent<UI_Jugador>();
-                    jugador3.instanciarCarta(-250,0,1,"O",3);
-                    jugador3.instanciarCarta(0,0,2,"E",10);
-                    jugador3.instanciarCarta(250,0,3,"E",7);
+                    jugador3.instanciarCarta(-250,0,1);
+                    jugador3.instanciarCarta(0,0,2);
+                    jugador3.instanciarCarta(250,0,3);
                     btnTurno3 = GameObject.Find("BtnTurno3").GetComponent<Button>();
                     btnFlor3 = GameObject.Find("BtnFlor3").GetComponent<Button>();
                     break;
@@ -90,9 +107,9 @@ public class UI_Mesa : MonoBehaviour{
                     posicion.y += y;
                     goJugador4.transform.position = posicion;
                     jugador4 = goJugador4.GetComponent<UI_Jugador>();
-                    jugador4.instanciarCarta(-250,0,1,"B",2);
-                    jugador4.instanciarCarta(0,0,2,"O",1);
-                    jugador4.instanciarCarta(250,0,3,"C",1);
+                    jugador4.instanciarCarta(-250,0,1);
+                    jugador4.instanciarCarta(0,0,2);
+                    jugador4.instanciarCarta(250,0,3);
                     btnTurno4 = GameObject.Find("BtnTurno4").GetComponent<Button>();
                     btnFlor4 = GameObject.Find("BtnFlor4").GetComponent<Button>();
                     break;
