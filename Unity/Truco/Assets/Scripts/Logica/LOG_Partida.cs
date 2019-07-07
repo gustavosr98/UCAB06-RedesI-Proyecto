@@ -55,16 +55,16 @@ public class LOG_Partida : MonoBehaviour {
 
     public void actualizarMano(){
         if(mano == "A") {
-            mano = "B"
+            mano = "B";
             ui.info.set_mano(mano);
         } else if(mano == "B") {
-            mano = "C"
+            mano = "C";
             ui.info.set_mano(mano);
         } else if(mano == "C") {
-            mano = "D"
+            mano = "D";
             ui.info.set_mano(mano);
         } else if(mano == "D") {
-            mano = "A"
+            mano = "A";
             ui.info.set_mano(mano);
         }
     }

@@ -10,7 +10,7 @@ public class UI_Apuestas : MonoBehaviour{
 
     public bool cond;
     public string trucoActual = "Normal";
-    public string vozActual = "Ambos"
+    public string vozActual = "Ambos";
 
     void Start(){
         BtnTruco = GameObject.Find("BtnTruco").GetComponent<Button>();
