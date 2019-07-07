@@ -12,4 +12,6 @@ public class Interfaz : MonoBehaviour {
 	void Awake(){
         mesa = GameObject.Find("Mesa").GetComponent<UI_Mesa>();
 	}
+
+	
 }
