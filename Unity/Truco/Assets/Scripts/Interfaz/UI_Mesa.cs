@@ -37,7 +37,6 @@ public class UI_Mesa : MonoBehaviour{
         instanciarJugador(0     ,550    ,3);
         instanciarJugador(-1000 ,0      ,4);
 
-        jugador1.activarJugador();
 
     }
 
