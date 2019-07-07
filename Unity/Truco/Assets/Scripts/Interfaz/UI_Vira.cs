@@ -16,7 +16,7 @@ public class UI_Vira : MonoBehaviour {
         Debug.Log("UI_Carta.darValor( " + pinta + " , " + numero + " )");
         this.pinta = pinta;
         this.numero = numero;
-        Image imagenCarta = gameObject.GetComponent<Image>();
+        Image imagenCarta = GameObject.Find("ImgVira").GetComponent<Image>();
         imagenCarta.sprite = Resources.Load<Sprite>("Sprites/" + pinta + numero);
     }
 
