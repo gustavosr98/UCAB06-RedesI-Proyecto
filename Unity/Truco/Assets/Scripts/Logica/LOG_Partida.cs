@@ -7,6 +7,7 @@ public class LOG_Partida : MonoBehaviour {
     Comunicacion com;
     Interfaz ui;
     Logica log;
+    Carta carta;
     
     // DATOS DEL PARTIDA 
     public string nivelTruco = "Normal";
@@ -31,7 +32,45 @@ public class LOG_Partida : MonoBehaviour {
     // METODOS 
 
     public void calcularEnvido() {
-        
+        int ganador1 = carta.envido(ui.mesa.jugador1.carta1.numero, ui.mesa.jugador1.carta1.pinta,
+                                    ui.mesa.jugador1.carta2.numero, ui.mesa.jugador1.carta2.pinta,
+                                    ui.mesa.jugador1.carta3.numero, ui.mesa.jugador1.carta3.pinta,
+                                    ui.mesa.jugador2.carta1.numero, ui.mesa.jugador2.carta1.pinta,
+                                    ui.mesa.jugador2.carta2.numero, ui.mesa.jugador2.carta2.pinta,
+                                    ui.mesa.jugador2.carta3.numero, ui.mesa.jugador2.carta3.pinta, );
+
+        int ganador2 = carta.envido(ui.mesa.jugador3.carta1.numero, ui.mesa.jugador3.carta1.pinta,
+                                    ui.mesa.jugador3.carta2.numero, ui.mesa.jugador3.carta2.pinta,
+                                    ui.mesa.jugador3.carta3.numero, ui.mesa.jugador3.carta3.pinta,
+                                    ui.mesa.jugador4.carta1.numero, ui.mesa.jugador4.carta1.pinta,
+                                    ui.mesa.jugador4.carta2.numero, ui.mesa.jugador4.carta2.pinta,
+                                    ui.mesa.jugador4.carta3.numero, ui.mesa.jugador4.carta3.pinta, );
+
+        UI_Jugador gan1, gan2, ganador;
+        if(ganador1 == -1) {
+            gan1 = ui.mesa.jugador1;
+        } else {
+            gan1 = ui.mesa.jugador2;
+        }
+        if(ganador2 == -1) {
+            gan2 = ui.mesa.jugador3;
+        } else {
+            gan2 = ui.mesa.jugador4;
+        }
+        int ganadorTotal = carta.envido(gan1.carta1.numero, gan1.carta1.pinta,
+                                        gan1.carta2.numero, gan1.carta2.pinta,
+                                        gan1.carta3.numero, gan1.carta3.pinta,
+                                        gan2.carta1.numero, gan2.carta1.pinta,
+                                        gan2.carta2.numero, gan2.carta2.pinta,
+                                        gan2.carta3.numero, gan2.carta3.pinta, );
+
+        if(ganadorTotal == 1) {
+            ganador = gan2;
+        } else if(ganadorTotal == -1) {
+            ganador = gan1;
+        } else {
+            //empate
+        }
     }
 
     public void terminarPartida(int ac , int bd){
