@@ -15,10 +15,10 @@ public class Interfaz : MonoBehaviour {
 	void Awake(){
         mesa = GameObject.Find("Mesa").GetComponent<UI_Mesa>();
 		info = GameObject.Find("Info").GetComponent<UI_Info>();
-		//apuesta = GameObject.Find("Apuestas").GetComponent<UI_Apuestas>();
+		apuesta = GameObject.Find("Apuestas").GetComponent<UI_Apuestas>();
 		vira = GameObject.Find("Vira").GetComponent<UI_Vira>();
-		//inicio = GameObject.Find("UI_Inicio").GetComponent<UI_Inicio>();
-		//gameOver = GameObject.Find("UI_GameOver").GetComponent<UI_GameOver>();
+		inicio = GameObject.Find("UI_Inicio").GetComponent<UI_Inicio>();
+		gameOver = GameObject.Find("UI_GameOver").GetComponent<UI_GameOver>();
 	}
 
 	
