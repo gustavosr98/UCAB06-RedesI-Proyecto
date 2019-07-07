@@ -34,24 +34,63 @@ public class LOG_Partida : MonoBehaviour {
             log.juego.ptsAC += ac 
             log.juego.ptsBD += bd
         */
-        
+        ui.info.set_ptsAC( ac );
+        ui.info.set_ptsBD( bd );
+        log.juego.ptsAC += ac;
+        log.juego.ptsBD += bd;
         // REINICIAR DATOS DE PARTIDA
 
-        if ( /* log.juego.ptsAC >= 24 */ true ){
-            // log.juego.terminarJuego( "AC" )
+        if ( log.juego.ptsAC >= 24 ){
+            log.juego.terminarJuego( "AC" );
             // com.enviar(HAY GANADOR)
         } else if (bd >= 24){
-
+            log.juego.terminarJuego( "BD" );
         }
     }
 
-    public void actualizarMano(){
-        
+    public void set_nivelTruco() {
+        nivelTruco = ui.apuesta.trucoActual;
+        ui.info.set_nivelTruco(nivelTruco);
     }
 
+    public void actualizarMano(){
+        if(mano == "A") {
+            mano = "B"
+            ui.info.set_mano(mano);
+        } else if(mano == "B") {
+            mano = "C"
+            ui.info.set_mano(mano);
+        } else if(mano == "C") {
+            mano = "D"
+            ui.info.set_mano(mano);
+        } else if(mano == "D") {
+            mano = "A"
+            ui.info.set_mano(mano);
+        }
+    }
 
+    public void actualizarVoz(string voz){
+        ui.info.set_voz(voz);
+    }
 
+    public void actualizarEnvido(bool envido) {
+        if(envido) {
+            ui.info.set_envido("Si");
+        } else {
+            ui.info.set_envido("No");
+        }
+    }
 
+    public void actualizarRonda1(string ronda1) {
+        ui.info.set_ronda1(ronda1);
+    }
 
+    public void actualizarRonda2(string ronda2) {
+        ui.info.set_ronda2(ronda2);
+    }
+
+    public void actualizarRonda3(string ronda3) {
+        ui.info.set_ronda3(ronda3);
+    }
     
 }
