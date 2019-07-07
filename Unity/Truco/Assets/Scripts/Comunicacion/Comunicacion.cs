@@ -16,7 +16,9 @@ public class Comunicacion : MonoBehaviour {
     private string strBufferIn;
     private string strBufferOut;
     SerialPort puertoA = new SerialPort();
+    SerialPort puertoB = new SerialPort();
 
+    public string lastMsj = "";
     // DATOS
     public string tipo;    
     public string puertoTx;
@@ -25,7 +27,7 @@ public class Comunicacion : MonoBehaviour {
 
     // COMPONENTES
     Button btnEnviar, btnConectar;
-    Dropdown dropPuertos, dropVelocidad;
+    Dropdown dropPuertosA, dropPuertosB, dropVelocidad;
     InputField inEnviar, inRecibido;
 
     void Start(){
@@ -34,13 +36,14 @@ public class Comunicacion : MonoBehaviour {
            
         btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
         btnEnviar.interactable = false;
-        btnEnviar.onClick.AddListener(enviar);
+        btnEnviar.onClick.AddListener(enviarBtn);
 
         btnConectar = GameObject.Find("BtnConectar").GetComponent<Button>();
         btnConectar.interactable = false;
         btnConectar.onClick.AddListener(conectar);
 
-        dropPuertos = GameObject.Find("DropPuertos").GetComponent<Dropdown>();
+        dropPuertosA = GameObject.Find("DropPuertosA").GetComponent<Dropdown>();
+        dropPuertosB = GameObject.Find("DropPuertosB").GetComponent<Dropdown>();
         dropVelocidad = GameObject.Find("DropVelocidad").GetComponent<Dropdown>();
 
         inEnviar = GameObject.Find("InEnviar").GetComponent<InputField>();
@@ -59,8 +62,10 @@ public class Comunicacion : MonoBehaviour {
         if (puertosDisponibles.Length > 0)
             btnConectar.interactable = true;
 
-        dropPuertos.ClearOptions();
-        dropPuertos.AddOptions(puertosDisponiblesList);
+        dropPuertosA.ClearOptions();
+        dropPuertosA.AddOptions(puertosDisponiblesList);
+        dropPuertosB.ClearOptions();
+        dropPuertosB.AddOptions(puertosDisponiblesList);
     }
 
 
@@ -73,19 +78,24 @@ public class Comunicacion : MonoBehaviour {
             ){
                 Debug.Log("Comunicacion.conectar()");
 
-                puertoA.BaudRate = Int32.Parse(
+                puertoA.BaudRate = puertoB.BaudRate = Int32.Parse(
                     dropVelocidad.options[dropVelocidad.value].text
                 );
-                puertoA.DataBits = 8;
-                puertoA.Parity = Parity.None;
-                puertoA.StopBits = StopBits.One;
-                puertoA.Handshake = Handshake.None;
+                //puertoA.DataBits = 8;
+                //puertoA.Parity = Parity.None;
+                // puertoA.StopBits = StopBits.One;
+                // puertoA.Handshake = Handshake.None;
                 puertoA.PortName = (
-                    dropPuertos.options[dropPuertos.value].text
+                    dropPuertosA.options[dropPuertosA.value].text
                 );
+                puertoB.PortName = (
+                    dropPuertosB.options[dropPuertosB.value].text
+                );
+                puertoA.ReadTimeout = puertoB.ReadTimeout = 100;
 
                 try {
                     puertoA.Open();
+                    puertoB.Open();
                     btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
                     btnEnviar.interactable = true;
                 }
@@ -96,6 +106,7 @@ public class Comunicacion : MonoBehaviour {
             } else {
                 Debug.Log("Comunicacion.desconectar()");
                 puertoA.Close();
+                puertoB.Close();
                 btnConectar.gameObject.GetComponentInChildren<Text>().text = "Conectar";
                 btnEnviar.interactable = false;
             }
@@ -107,11 +118,25 @@ public class Comunicacion : MonoBehaviour {
     }
 
     // ENVIAR DATOS
-    public void enviar() {
+    public void enviarBtn() {
         try {
             puertoA.DiscardOutBuffer();
             strBufferOut = inEnviar.text;
-            Debug.Log("Comunicacion.enviar( " + inEnviar.text + " )");
+            Debug.Log("Comunicacion.enviarBtn( " + inEnviar.text + " )");
+            puertoA.Write(strBufferOut);
+        }
+        catch (Exception error)
+        {
+            Debug.LogError(error.Message.ToString());
+            throw;
+        }
+    }
+
+    public void enviar(string x) {
+        try {
+            puertoA.DiscardOutBuffer();
+            strBufferOut = x;
+            Debug.Log("Comunicacion.enviar( " + x + " )");
             puertoA.Write(strBufferOut);
         }
         catch (Exception error)
@@ -122,6 +147,7 @@ public class Comunicacion : MonoBehaviour {
     }
 
     // RECIBIR DATOS
+    /* 
     private delegate void DelegadoAcceso( string accion );
     private void AccesoForm( string accion ){
         strBufferIn = accion;
@@ -134,6 +160,19 @@ public class Comunicacion : MonoBehaviour {
     }
     private void DatoRecibido(object sender, SerialDataReceivedEventArgs e){
         AccesoInterrupcion( puertoA.ReadExisting() );
+    }
+    */
+    
+    void Update(){
+        try {
+            if (puertoB.IsOpen){
+                inRecibido.text = puertoB.ReadExisting();
+                if ( inRecibido.text != lastMsj){
+                    lastMsj = inRecibido.text;
+                    enviar(inRecibido.text);
+                }
+            }
+        } catch (System.Exception ex) { }
     }
 
         // OPCION 2
