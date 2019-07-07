@@ -33,7 +33,7 @@ public class Comunicacion : MonoBehaviour {
     void Start(){
         strBufferIn = "";
         strBufferOut = "";
-           
+        
         btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
         btnEnviar.interactable = false;
         btnEnviar.onClick.AddListener(enviarBtn);
