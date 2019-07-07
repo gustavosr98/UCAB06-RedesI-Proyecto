@@ -30,6 +30,7 @@ public class UI_Carta : MonoBehaviour {
 
     public void desactivarCarta(){
         Debug.Log("UI_Carta.desactivarCarta()");
+        carta = gameObject.GetComponent<Button>();
         carta.interactable = false;
     }
 

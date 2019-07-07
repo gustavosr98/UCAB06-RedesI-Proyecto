@@ -4,11 +4,11 @@ using System;
 using UnityEngine;
 
 public class LOG_Ronda : MonoBehaviour {
-    Logica log;
-    Comunicacion com;
-    Interfaz ui;
+    public Logica log;
+    public Comunicacion com;
+    public Interfaz ui;
     
-    
+    System.Random aleatorio = new System.Random();
     /* 
         public string masFuerte;
         masFuerte e { A, B, C, D, empate }
@@ -22,14 +22,16 @@ public class LOG_Ronda : MonoBehaviour {
     public void revisarMasFuerte(){
 
     }
-    List<Carta> cartas = new List<Carta>();
+    public List<Carta> cartas = new List<Carta>();
 
     void Start() {
-        repartirCarta_r();
+        ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
+        log = GameObject.Find("Logica").GetComponent<Logica>();
     }
 
     public void crearArray() {
         Carta x;
+        cartas = new List<Carta>();
         x = new Carta( "O", 1 );
         cartas.Add(x);
         x = new Carta( "O", 2 );
@@ -113,24 +115,19 @@ public class LOG_Ronda : MonoBehaviour {
     }
 
     public Carta generarRandom(){
-        /* int numero;
-        numero = aleatorio.Next(cartas.Count-1);
-        object carta = cartas[numero];
-        cartas.Remove(numero);
-        return carta;*/
-
-        
-        System.Random aleatorio = new System.Random();
-        int count = cartas.Count-1;
-        int numero = aleatorio.Next(count);
-        Carta carta = cartas[numero];
-        cartas.RemoveAt(numero);
+        int index = aleatorio.Next(cartas.Count-1);
+        Carta carta = cartas[index];
+        cartas.RemoveAt(index);
         return carta;
     }
+    
+    IEnumerator Esperar(int x){
+        yield return new WaitForSeconds(x);
+    }
 
-    public void repartirCarta_r(){
-        crearArray();
+    public void repartirCartasAleatorio(){
         Carta carta;
+        crearArray();
         carta = generarRandom();
         ui.mesa.jugador1.carta1.darValor(carta.pinta,carta.numero);
         carta = generarRandom();
@@ -155,6 +152,15 @@ public class LOG_Ronda : MonoBehaviour {
         ui.mesa.jugador4.carta2.darValor(carta.pinta,carta.numero);
         carta = generarRandom();
         ui.mesa.jugador4.carta3.darValor(carta.pinta,carta.numero);
+
+        /*
+            com.ronda.darCartas("A",
+                ui.mesa.jugador1.carta1.pinta, ui.mesa.jugador1.carta1.numero,
+                ui.mesa.jugador1.carta2.pinta, ui.mesa.jugador1.carta2.numero,
+                ui.mesa.jugador1.carta3.pinta, ui.mesa.jugador1.carta3.numero
+            )
+            com.ronda.darCartas("B"...)
+        */
     }
 
     public void jugarCarta_e(){

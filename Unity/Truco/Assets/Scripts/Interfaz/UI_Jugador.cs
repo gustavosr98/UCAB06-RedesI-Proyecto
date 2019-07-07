@@ -56,7 +56,14 @@ public class UI_Jugador : MonoBehaviour{
         }
     }
 
-
+    public void activarJugador(){
+        carta1.mostrarCarta();
+        carta2.mostrarCarta();
+        carta3.mostrarCarta();
+        carta1.activarCarta();
+        carta2.activarCarta();
+        carta3.activarCarta();
+    }
     public void jugarCarta( int carta, float x, float y, bool reiniciar ){
         Debug.Log("UI_Jugador.jugarCarta()");
         switch(carta) {

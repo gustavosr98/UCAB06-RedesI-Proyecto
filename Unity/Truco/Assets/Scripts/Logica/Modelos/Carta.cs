@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class Carta : MonoBehaviour {
+public class Carta {
     public string pinta;
     public int numero;
 
