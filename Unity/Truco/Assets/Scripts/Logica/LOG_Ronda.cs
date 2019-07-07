@@ -19,6 +19,7 @@ public class LOG_Ronda : MonoBehaviour {
         public UI_Carta carta4
     */
 
+
     public void revisarMasFuerte(){
 
     }
@@ -121,9 +122,6 @@ public class LOG_Ronda : MonoBehaviour {
         return carta;
     }
     
-    IEnumerator Esperar(int x){
-        yield return new WaitForSeconds(x);
-    }
 
     public void repartirCartasAleatorio(){
         Carta carta;
@@ -162,6 +160,58 @@ public class LOG_Ronda : MonoBehaviour {
             com.ronda.darCartas("B"...)
         */
     }
+
+    public void activarJugadores(){
+        /*
+            com.ronda.darCartas("A",
+                ui.mesa.jugador1.carta1.pinta, ui.mesa.jugador1.carta1.numero,
+                ui.mesa.jugador1.carta2.pinta, ui.mesa.jugador1.carta2.numero,
+                ui.mesa.jugador1.carta3.pinta, ui.mesa.jugador1.carta3.numero
+            )
+            com.ronda.darCartas("B"...)
+        */
+        if(log.juego.jugador == "A"){
+            ui.mesa.jugador1.activarJugador();
+        }
+        else if(log.juego.jugador == "B"){
+            ui.mesa.jugador2.activarJugador();
+        }
+        else if(log.juego.jugador == "C"){
+            ui.mesa.jugador3.activarJugador();
+        }
+        else if(log.juego.jugador == "D"){
+            ui.mesa.jugador4.activarJugador();
+        }
+    }
+
+    public void darTurno(){
+        if(log.juego.jugador == "A"){
+            ui.mesa.activarTurno(1);
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.desactivarTurno(3);
+            ui.mesa.desactivarTurno(4);
+        }
+        else if(log.juego.jugador == "B"){
+            ui.mesa.activarTurno(2);
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.desactivarTurno(3);
+            ui.mesa.desactivarTurno(4);
+        }
+        else if(log.juego.jugador == "C"){
+            ui.mesa.activarTurno(3);
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.desactivarTurno(4);
+
+        }
+        else if(log.juego.jugador == "D"){
+            ui.mesa.activarTurno(4);
+            ui.mesa.desactivarTurno(1);
+            ui.mesa.desactivarTurno(2);
+            ui.mesa.desactivarTurno(3);
+        }
+    }
+
 
     public void jugarCarta_e(){
         // YUCA

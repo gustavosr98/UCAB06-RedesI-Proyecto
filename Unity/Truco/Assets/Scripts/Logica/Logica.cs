@@ -13,6 +13,6 @@ public class Logica : MonoBehaviour
 
     void Start(){
         ronda = gameObject.GetComponent<LOG_Ronda>();
-
+        juego = gameObject.GetComponent<LOG_Juego>();
     }
 }
