@@ -7,15 +7,15 @@ using System.IO.Ports;
 
 // LIBRERIA PARA UI
 using UnityEngine.UI;
+using System;
 
 public class Comunicacion : MonoBehaviour {
     public Logica logica;
        
-
+    // PUERTO SERIAL
     private string strBufferIn;
     private string strBufferOut;
-    SerialPort serialPort;
-    private delegate void DelegadoAcceso(string accion);
+    SerialPort puertoA = new SerialPort();
 
     // DATOS
     public string tipo;    
@@ -23,161 +23,128 @@ public class Comunicacion : MonoBehaviour {
     public string puertoRx;
     public string velocidad;
 
+    // COMPONENTES
+    Button btnEnviar, btnConectar;
+    Dropdown dropPuertos, dropVelocidad;
+    InputField inEnviar, inRecibido;
 
-    void Start()
-    {
+    void Start(){
         strBufferIn = "";
         strBufferOut = "";
-
-        Button btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
+           
+        btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
         btnEnviar.interactable = false;
+        btnEnviar.onClick.AddListener(enviar);
+
+        btnConectar = GameObject.Find("BtnConectar").GetComponent<Button>();
+        btnConectar.interactable = false;
+        btnConectar.onClick.AddListener(conectar);
+
+        dropPuertos = GameObject.Find("DropPuertos").GetComponent<Dropdown>();
+        dropVelocidad = GameObject.Find("DropVelocidad").GetComponent<Dropdown>();
+
+        inEnviar = GameObject.Find("InEnviar").GetComponent<InputField>();
+        inRecibido = GameObject.Find("InRecibido").GetComponent<InputField>();
     }
 
     public void buscarPuertos(){
+        Debug.Log("Comunicacion.buscarPuertos()");
+
         string[] puertosDisponibles = SerialPort.GetPortNames();
         List<string> puertosDisponiblesList = new List<string>();
         foreach (string puerto in puertosDisponibles) {
             puertosDisponiblesList.Add(puerto);
         }
 
-        Dropdown dropdown = GameObject.Find("DropPuertos").GetComponent<Dropdown>();
-        dropdown.ClearOptions();
-        dropdown.AddOptions(puertosDisponiblesList);
+        if (puertosDisponibles.Length > 0)
+            btnConectar.interactable = true;
 
-        /* 
-            if (CboPuertos.Items.Count > 0)
-            {
-                CboPuertos.SelectedItem = 0;
-                MessageBox.Show("SELECCIONAR EL PUERTO DE TRABAJO");
-                BtnConectar.Enabled = true;
-            }
-            else
-            {
-                MessageBox.Show("NINGUN PUERTO DETECTADO");
-                CboPuertos.Items.Clear();
-                CboPuertos.Text = "                  ";
-
-                strBufferIn = "";
-                strBufferOut = "";
-                BtnConectar.Enabled = false;
-                BtnEnviarDatos.Enabled = false;
-            }
-        */
+        dropPuertos.ClearOptions();
+        dropPuertos.AddOptions(puertosDisponiblesList);
     }
 
 
-
-    /*
-    public Form1()
+    public void conectar()
     {
-        InitializeComponent();
-    }
 
-    private void AccesoForm(string accion)
-    {
-        strBufferIn = accion;
-        TxtDatosRecibidos.Text = strBufferIn;
-    }
+        try {
+            if (btnConectar.gameObject.GetComponentInChildren<Text>().text
+                    == "Conectar"
+            ){
+                Debug.Log("Comunicacion.conectar()");
 
-    private void AccesoInterrupcion(string accion)
-    {
-        DelegadoAcceso var_delegadoAcceso = new DelegadoAcceso(AccesoForm);
-        object[] arg = { accion };
-        base.Invoke(var_delegadoAcceso, arg);
-    }
+                puertoA.BaudRate = Int32.Parse(
+                    dropVelocidad.options[dropVelocidad.value].text
+                );
+                puertoA.DataBits = 8;
+                puertoA.Parity = Parity.None;
+                puertoA.StopBits = StopBits.One;
+                puertoA.Handshake = Handshake.None;
+                puertoA.PortName = (
+                    dropPuertos.options[dropPuertos.value].text
+                );
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
-       
-
-    }
-
-    private void BtnBuscarPuertos_Click(object sender, EventArgs e)
-    {
-        string[] puertosDisponibles = SerialPort.GetPortNames();
-        foreach (string puerto in puertosDisponibles)
-        {
-            CboPuertos.Items.Add(puerto);
-        }
-
-        if (CboPuertos.Items.Count > 0)
-        {
-            CboPuertos.SelectedItem = 0;
-            MessageBox.Show("SELECCIONAR EL PUERTO DE TRABAJO");
-            BtnConectar.Enabled = true;
-        }
-        else
-        {
-            MessageBox.Show("NINGUN PUERTO DETECTADO");
-            CboPuertos.Items.Clear();
-            CboPuertos.Text = "                  ";
-
-            strBufferIn = "";
-            strBufferOut = "";
-            BtnConectar.Enabled = false;
-            BtnEnviarDatos.Enabled = false;
-        }
-    }
-
-    private void BtnConectar_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            if (BtnConectar.Text == "CONECTAR")
-            {
-                SpPuertos.BaudRate = Int32.Parse(CboBaudRate.Text);
-                SpPuertos.DataBits = 8;
-                SpPuertos.Parity = Parity.None;
-                SpPuertos.StopBits = StopBits.One;
-                SpPuertos.Handshake = Handshake.None;
-                SpPuertos.PortName = CboPuertos.Text;
-
-                try
-                {
-                    SpPuertos.Open();
-                    BtnConectar.Text = "DESCONECTAR";
-                    BtnEnviarDatos.Enabled = true;
+                try {
+                    puertoA.Open();
+                    btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
+                    btnEnviar.interactable = true;
                 }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message.ToString());
+                catch (Exception error) {
+                    Debug.LogError(error.Message.ToString());
                     throw;
                 }
-
+            } else {
+                Debug.Log("Comunicacion.desconectar()");
+                puertoA.Close();
+                btnConectar.gameObject.GetComponentInChildren<Text>().text = "Conectar";
+                btnEnviar.interactable = false;
             }
-            else if (BtnConectar.Text == "DESCONECTAR")
-            {
-                SpPuertos.Close();
-                BtnConectar.Text = "CONECTAR";
-                BtnEnviarDatos.Enabled = false;
-            }
-        }
-        catch (Exception error)
-        {
-            MessageBox.Show(error.Message.ToString());
+        } catch (Exception error) {
+            Debug.LogError(error.Message.ToString());
             throw;
         }
-    }
-
-    private void BtnEnviarDatos_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            SpPuertos.DiscardOutBuffer();
-            strBufferOut = TxtDatos_a_Enviar.Text;
-            SpPuertos.Write(strBufferOut);
-        }
-        catch (Exception error)
-        {
-            MessageBox.Show(error.Message.ToString());
-            throw;
-        }
-    }
-
-    private void DatoRecibido(object sender, SerialDataReceivedEventArgs e)
-    {
-        AccesoInterrupcion(SpPuertos.ReadExisting());
         
     }
-     */
-}
+
+    // ENVIAR DATOS
+    public void enviar() {
+        try {
+            puertoA.DiscardOutBuffer();
+            strBufferOut = inEnviar.text;
+            Debug.Log("Comunicacion.enviar( " + inEnviar.text + " )");
+            puertoA.Write(strBufferOut);
+        }
+        catch (Exception error)
+        {
+            Debug.LogError(error.Message.ToString());
+            throw;
+        }
+    }
+
+    // RECIBIR DATOS
+    private delegate void DelegadoAcceso( string accion );
+    private void AccesoForm( string accion ){
+        strBufferIn = accion;
+        inRecibido.text = strBufferIn;
+    }
+    private void AccesoInterrupcion( string accion ){
+        DelegadoAcceso delegadoObj = new DelegadoAcceso(AccesoForm);
+        object[] arg = { accion };
+        delegadoObj.DynamicInvoke( arg );
+    }
+    private void DatoRecibido(object sender, SerialDataReceivedEventArgs e){
+        AccesoInterrupcion( puertoA.ReadExisting() );
+    }
+
+        // OPCION 2
+        /*
+        void Update()
+        {
+            if (puertoA.IsOpen && puertoA.BytesToRead >= 8) {
+                Debug.Log(puertoA.ReadLine());
+            }
+        }
+        */
+
+
+    }
