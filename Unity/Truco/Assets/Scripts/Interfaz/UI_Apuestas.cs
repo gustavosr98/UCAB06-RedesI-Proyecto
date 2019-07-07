@@ -8,8 +8,9 @@ using UnityEngine.UI;
 public class UI_Apuestas : MonoBehaviour{
     public Button BtnTruco,BtnTrucoSi,BtnTrucoNo,BtnEnvido,BtnEnvidoSi,BtnEnvidoNo;
 
-    private bool cond;
-    private string trucoActual = "Normal";
+    public bool cond;
+    public string trucoActual = "Normal";
+    public string vozActual = "Ambos";
 
     void Start(){
         BtnTruco = GameObject.Find("BtnTruco").GetComponent<Button>();

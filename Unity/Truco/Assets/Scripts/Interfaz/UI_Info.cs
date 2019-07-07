@@ -26,7 +26,7 @@ public class UI_Info : MonoBehaviour {
         ronda1 = GameObject.Find("InRonda1").GetComponent<InputField>();
         ronda2 = GameObject.Find("InRonda2").GetComponent<InputField>();
         ronda3 = GameObject.Find("InRonda3").GetComponent<InputField>();
-        set_ptsAC(10);
+        /*set_ptsAC(10);
         set_ptsBD(15);
         set_nivelTruco("Vale Juego");
         set_voz("AC");
@@ -34,7 +34,7 @@ public class UI_Info : MonoBehaviour {
         set_envido("Si");
         set_ronda1("BD");
         set_ronda2("Ronda Actual");
-        set_ronda3("Por Jugar");
+        set_ronda3("Por Jugar");*/
     }
     
     public void set_ptsAC( int x ) {
