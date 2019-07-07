@@ -76,14 +76,14 @@ public class Comunicacion : MonoBehaviour {
                 puertoA.BaudRate = Int32.Parse(
                     dropVelocidad.options[dropVelocidad.value].text
                 );
-                puertoA.DataBits = 8;
-                puertoA.Parity = Parity.None;
-                puertoA.StopBits = StopBits.One;
-                puertoA.Handshake = Handshake.None;
+                //puertoA.DataBits = 8;
+                //puertoA.Parity = Parity.None;
+                // puertoA.StopBits = StopBits.One;
+                // puertoA.Handshake = Handshake.None;
                 puertoA.PortName = (
                     dropPuertos.options[dropPuertos.value].text
                 );
-
+                puertoA.ReadTimeout = 100;
                 try {
                     puertoA.Open();
                     btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
@@ -122,6 +122,7 @@ public class Comunicacion : MonoBehaviour {
     }
 
     // RECIBIR DATOS
+    /* 
     private delegate void DelegadoAcceso( string accion );
     private void AccesoForm( string accion ){
         strBufferIn = accion;
@@ -134,6 +135,15 @@ public class Comunicacion : MonoBehaviour {
     }
     private void DatoRecibido(object sender, SerialDataReceivedEventArgs e){
         AccesoInterrupcion( puertoA.ReadExisting() );
+    }
+    */
+    
+    void Update(){
+        try {
+            if (puertoA.IsOpen){
+                inRecibido.text = puertoA.ReadExisting();
+            }
+        } catch (System.Exception ex) { }
     }
 
         // OPCION 2
