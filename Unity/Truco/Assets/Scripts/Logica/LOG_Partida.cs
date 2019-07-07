@@ -16,7 +16,7 @@ public class LOG_Partida : MonoBehaviour {
 
     public bool envido = false;
 
-    public string ronda1 = "Ronda actual";
+    public string ronda1 = "Ronda Actual";
     public string ronda2 = "Por jugar";
     public string ronda3 = "Por jugar";
 

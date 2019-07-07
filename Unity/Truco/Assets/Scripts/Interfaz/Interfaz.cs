@@ -19,6 +19,7 @@ public class Interfaz : MonoBehaviour {
 		vira = GameObject.Find("Vira").GetComponent<UI_Vira>();
 		//inicio = GameObject.Find("UI_Inicio").GetComponent<UI_Inicio>();
 		//gameOver = GameObject.Find("UI_GameOver").GetComponent<UI_GameOver>();
+		
 	}
 
 	

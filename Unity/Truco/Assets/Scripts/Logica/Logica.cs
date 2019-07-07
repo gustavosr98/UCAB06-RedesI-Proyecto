@@ -14,5 +14,6 @@ public class Logica : MonoBehaviour
     void Start(){
         ronda = gameObject.GetComponent<LOG_Ronda>();
         juego = gameObject.GetComponent<LOG_Juego>();
+        partida = gameObject.GetComponent<LOG_Partida>();
     }
 }

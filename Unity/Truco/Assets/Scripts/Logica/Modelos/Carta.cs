@@ -114,6 +114,7 @@ public class Carta {
     }
 
     public static int duelo (int numero1, string pinta1, int numero2, string pinta2, string vira ){
+            Debug.Log(numero1);
             if(Carta.valorCarta(numero1,pinta1,vira) > Carta.valorCarta(numero2,pinta2,vira)){
                 return -1;
             }
