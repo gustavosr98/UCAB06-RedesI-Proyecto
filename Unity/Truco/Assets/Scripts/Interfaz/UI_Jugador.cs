@@ -131,8 +131,8 @@ public class UI_Jugador : MonoBehaviour{
     public void jugarCarta( int jugador, int carta ){
         Debug.Log("UI_Jugador.jugarCarta()");
         switch(jugador) {
-            case 1: posicion.x += -250;
-                    posicion.y += 350;
+            case 1: posicion.x = 0;
+                    posicion.y = -200;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
@@ -154,53 +154,71 @@ public class UI_Jugador : MonoBehaviour{
                                 break;
                     }
                     break;
-            case 2: posicion.x += -850;
-                    posicion.y += 0;
+            case 2: posicion.x = 350;
+                    posicion.y = 0;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
                                 carta1.desactivarCarta();
+                                carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 2: goCarta2.transform.position = posicion;
                                 carta2.mostrarCarta();
+                                carta1.desactivarCarta();
                                 carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 3: goCarta3.transform.position = posicion;
                                 carta3.mostrarCarta();
+                                carta1.desactivarCarta();
+                                carta2.desactivarCarta();
                                 carta3.desactivarCarta();
                                 break;
                     }
                     break;
-            case 3: posicion.x += -250;
-                    posicion.y += -350;
+            case 3: posicion.x = 0;
+                    posicion.y = 200;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
                                 carta1.desactivarCarta();
+                                carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 2: goCarta2.transform.position = posicion;
                                 carta2.mostrarCarta();
+                                carta1.desactivarCarta();
                                 carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 3: goCarta3.transform.position = posicion;
                                 carta3.mostrarCarta();
+                                carta1.desactivarCarta();
+                                carta2.desactivarCarta();
                                 carta3.desactivarCarta();
                                 break;
                     }
                     break;
-            case 4: posicion.x += 350;
-                    posicion.y += 0;
+            case 4: posicion.x = -350;
+                    posicion.y = 0;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
                                 carta1.desactivarCarta();
+                                carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 2: goCarta2.transform.position = posicion;
                                 carta2.mostrarCarta();
+                                carta1.desactivarCarta();
                                 carta2.desactivarCarta();
+                                carta3.desactivarCarta();
                                 break;
                         case 3: goCarta3.transform.position = posicion;
                                 carta3.mostrarCarta();
+                                carta1.desactivarCarta();
+                                carta2.desactivarCarta();
                                 carta3.desactivarCarta();
                                 break;
                     }
