@@ -8,24 +8,22 @@ public class UI_ScreenController : MonoBehaviour
     public Vector3 x;
 
     public int y = 0;
-    void Update(){
-        irPantalla(y);
-    }
+    
     public void irPantalla(int y){
         if(y == 1){
-            x = new Vector3(468f,155f,-210f);
+            x = new Vector3(-8900f,0f,0);
             moverCanvas(x);
         }
         else if(y == 2){
-            x = new Vector3(-1227f,107f,-230f);
+            x = new Vector3(-4425f,0f,-383f);
             moverCanvas(x);
         }
         else if(y == 3){
-            x = new Vector3(700f,700f,700f);
+            x = new Vector3(-11f,0f,-383f);
             moverCanvas(x);
         }
         else if(y == 4){
-            x = new Vector3(700f,700f,700f);
+            x = new Vector3(4542f,0f,-383f);
             moverCanvas(x);
         }
     }
