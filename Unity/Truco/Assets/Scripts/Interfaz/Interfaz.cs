@@ -12,6 +12,8 @@ public class Interfaz : MonoBehaviour {
 	public UI_GameOver gameOver;
     public UI_Comunicacion comunicacion;
 
+	public UI_ScreenController screenController;
+
 	void Awake(){
         mesa = GameObject.Find("Mesa").GetComponent<UI_Mesa>();
 		info = GameObject.Find("Info").GetComponent<UI_Info>();
@@ -21,6 +23,10 @@ public class Interfaz : MonoBehaviour {
 		//gameOver = GameObject.Find("UI_GameOver").GetComponent<UI_GameOver>();
 		
 	}
+
+	void Start() {
+        screenController = GameObject.Find("Interfaz").GetComponent<UI_ScreenController>();
+    }
 
 	
 }
