@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using System;
 
 public class Comunicacion : MonoBehaviour {
-    public Logica logica;
+    public Logica log;
        
     // PUERTO SERIAL
     private string strBufferIn;
@@ -28,7 +28,7 @@ public class Comunicacion : MonoBehaviour {
 
     // COMPONENTES
     Button btnEnviar, btnConectar, btnReal;
-    Dropdown dropPuertosA, dropPuertosB, dropVelocidad;
+    Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
     InputField inEnviar, inRecibido;
 
     void Start(){
@@ -52,6 +52,11 @@ public class Comunicacion : MonoBehaviour {
 
         inEnviar = GameObject.Find("InEnviar").GetComponent<InputField>();
         inRecibido = GameObject.Find("InRecibido").GetComponent<InputField>();
+
+        log = GameObject.Find("Logica").GetComponent<Logica>();
+        dropJugador = GameObject.Find("DropJugador").GetComponent<Dropdown>();
+        
+        GameObject.Find("BtnEmpezar").GetComponent<Button>().onClick.AddListener(establecerJugador);
     }
 
     public void buscarPuertos(){
@@ -72,6 +77,9 @@ public class Comunicacion : MonoBehaviour {
         dropPuertosB.AddOptions(puertosDisponiblesList);
     }
 
+    public void establecerJugador(){
+        log.juego.jugador = dropJugador.options[dropJugador.value].text; 
+    }
 
     public void conectar()
     {
