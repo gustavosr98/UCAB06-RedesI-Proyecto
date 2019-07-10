@@ -12,7 +12,7 @@ public class UI_Jugador : MonoBehaviour{
     public GameObject goCarta2;
     public GameObject goCarta3;
 
-    public Vector3 posicion;
+    public Vector3 posicion, tamaño;
 
     public UI_Carta cartaJugada;
     public UI_Carta carta1;
@@ -34,9 +34,12 @@ public class UI_Jugador : MonoBehaviour{
                     );
                     goCarta1.transform.SetParent(jugador.transform);
                     posicion = jugador.transform.position;
-                    posicion.x += -250;
+                    posicion.x += -1250;
                     posicion.y += 0;
                     goCarta1.transform.position = posicion;
+                    tamaño.y = 5;
+                    tamaño.x = 5;
+                    goCarta1.transform.localScale = tamaño;
                     carta1 = goCarta1.GetComponent<UI_Carta>();
                     carta1.noMostrarCarta();
                     carta1.desactivarCarta();
@@ -51,6 +54,9 @@ public class UI_Jugador : MonoBehaviour{
                     posicion.x += 0;
                     posicion.y += 0;
                     goCarta2.transform.position = posicion;
+                    tamaño.y = 5;
+                    tamaño.x = 5;
+                    goCarta2.transform.localScale = tamaño;
                     carta2 = goCarta2.GetComponent<UI_Carta>();
                     carta2.noMostrarCarta();
                     carta2.desactivarCarta();
@@ -62,9 +68,12 @@ public class UI_Jugador : MonoBehaviour{
                     );
                     goCarta3.transform.SetParent(jugador.transform);
                     posicion = jugador.transform.position;
-                    posicion.x += 250;
+                    posicion.x += 1250;
                     posicion.y += 0;
                     goCarta3.transform.position = posicion;
+                    tamaño.y = 5;
+                    tamaño.x = 5;
+                    goCarta3.transform.localScale = tamaño;
                     carta3 = goCarta3.GetComponent<UI_Carta>();
                     carta3.noMostrarCarta();
                     carta3.desactivarCarta();
@@ -106,7 +115,7 @@ public class UI_Jugador : MonoBehaviour{
         Debug.Log("UI_Jugador.reiniciarJuego()");
         switch(carta) {
             case 1: posicion = jugador.transform.position;
-                    posicion.x += -250;
+                    posicion.x += -1250;
                     posicion.y += 0;
                     goCarta1.transform.position = posicion;
                     carta1.noMostrarCarta();
@@ -120,7 +129,7 @@ public class UI_Jugador : MonoBehaviour{
                     carta2.desactivarCarta();
                     break;
             case 3: posicion = jugador.transform.position;
-                    posicion.x += 250;
+                    posicion.x += 1250;
                     posicion.y += 0;
                     goCarta3.transform.position = posicion;
                     carta3.noMostrarCarta();
@@ -132,8 +141,8 @@ public class UI_Jugador : MonoBehaviour{
     public void jugarCarta( int jugador, int carta ){
         Debug.Log("UI_Jugador.jugarCarta()");
         switch(jugador) {
-            case 1: posicion.x = 0;
-                    posicion.y = -200;
+            case 1: posicion.x =13900;
+                    posicion.y = 550;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
@@ -155,8 +164,8 @@ public class UI_Jugador : MonoBehaviour{
                                 break;
                     }
                     break;
-            case 2: posicion.x = 350;
-                    posicion.y = 0;
+            case 2: posicion.x = 16250;
+                    posicion.y = 1750;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
@@ -178,8 +187,8 @@ public class UI_Jugador : MonoBehaviour{
                                 break;
                     }
                     break;
-            case 3: posicion.x = 0;
-                    posicion.y = 200;
+            case 3: posicion.x = 13900;
+                    posicion.y = 3000;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
@@ -201,8 +210,8 @@ public class UI_Jugador : MonoBehaviour{
                                 break;
                     }
                     break;
-            case 4: posicion.x = -350;
-                    posicion.y = 0;
+            case 4: posicion.x = 11500;
+                    posicion.y = 1750;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posicion;
                                 carta1.mostrarCarta();
