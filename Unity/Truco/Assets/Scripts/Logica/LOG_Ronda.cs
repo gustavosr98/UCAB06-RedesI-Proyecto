@@ -84,7 +84,7 @@ public class LOG_Ronda : MonoBehaviour {
                     log.partida.mano = "A";
                 else
                     log.partida.mano = "C";
-
+                log.partida.ronda2 = "Ronda Actual";
             }
             else if (personaGanador == "2" || personaGanador == "4"){
                 log.partida.ronda1 = "BD";
@@ -93,13 +93,14 @@ public class LOG_Ronda : MonoBehaviour {
                     log.partida.mano = "B";
                 else
                     log.partida.mano = "D";
+                log.partida.ronda2 = "Ronda Actual";
             }
             else {
                 log.partida.ronda1 = "Empate";
                 ui.info.set_ronda1(log.partida.ronda1);
-
+                log.partida.ronda3 = "Ronda Actual";
             }
-            log.partida.ronda2 = "Ronda Actual";
+            
         }
         else if ( log.partida.ronda2.ToLower().Contains("Ronda Actual".ToLower()) ){
             print("Ganador de la ronda");
@@ -124,7 +125,8 @@ public class LOG_Ronda : MonoBehaviour {
             }
             else{
                 log.partida.ronda2 = "Empate";
-                ui.info.set_ronda2(log.partida.ronda2);              
+                ui.info.set_ronda2(log.partida.ronda2);  
+                log.partida.ronda2 = log.partida.ronda1;            
             }
             log.partida.ronda3 = "Ronda Actual";
 
