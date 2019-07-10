@@ -32,10 +32,10 @@ public class UI_Mesa : MonoBehaviour{
 
  
     void Start() {
-        instanciarJugador(0     ,-550   ,1);
-        instanciarJugador(1000  ,0      ,2);
-        instanciarJugador(0     ,550    ,3);
-        instanciarJugador(-1000 ,0      ,4);
+        instanciarJugador(0, -3000,1);
+        instanciarJugador(5500, 0, 2);
+        instanciarJugador(0, 3000, 3);
+        instanciarJugador(-5500, 0, 4);
 
     }
 
