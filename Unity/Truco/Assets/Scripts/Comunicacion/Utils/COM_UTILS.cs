@@ -6,21 +6,28 @@ using System;
 using System.Text;
 
 public static class COM_UTILS {
-    
-    public static string StringToBinary(string data){
-        StringBuilder sb = new StringBuilder();
-        foreach (char c in data.ToCharArray()){
-            sb.Append(Convert.ToString(c, 2).PadLeft(8, '0'));
+
+    public static string BinaryToHex(string binary){
+        StringBuilder result = new StringBuilder(binary.Length / 8 + 1);
+        // TODO: check all 1's or 0's... Will throw otherwise
+        int mod4Len = binary.Length % 8;
+        if (mod4Len != 0){
+            // pad to length multiple of 8
+            binary = binary.PadLeft(((binary.Length / 8) + 1) * 8, '0');
         }
-        return sb.ToString();
+
+        for (int i = 0; i < binary.Length; i += 8){
+            string eightBits = binary.Substring(i, 8);
+            result.AppendFormat("{0:X2}", Convert.ToByte(eightBits, 2));
+        }
+
+        return result.ToString();
     }
 
-    public static string BinaryToString(string data){
-        List<Byte> byteList = new List<Byte>();
-        for (int i = 0; i < data.Length; i += 8){
-            byteList.Add(Convert.ToByte(data.Substring(i, 8), 2));
-        }
-        return Encoding.ASCII.GetString(byteList.ToArray());
+    public static string HexToBinary(string hexvalue){
+        string binaryval = "";
+        binaryval = Convert.ToString(Convert.ToInt32(hexvalue, 16), 2);
+        return binaryval;
     }
 
     // ATRIBUTOS EN MENSAJES
@@ -145,7 +152,7 @@ public static class COM_UTILS {
     }
 
     // MENSAJES
-    public static string c_JUGAR_CARTA = "00000001"; 
+    public static string c_JUGAR_CARTA = "11000001"; 
     public static string JUGAR_CARTA(string e, string carta){
         // TT(8) E(3) D(3) Carta(6)
         return string.Format("{0}{1}{2}{3}", 
@@ -156,7 +163,7 @@ public static class COM_UTILS {
         );
     }
 
-    public static string c_PEDIR_CANTO = "00000010"; 
+    public static string c_PEDIR_CANTO = "11000010"; 
     public static string PEDIR_CANTO(string e, string D, string equipo, string canto){
         // TT(8) E(3) D(3) Equipo(1) Canto(1)
         return string.Format("{0}{1}{2}{3}{4}", 
@@ -168,7 +175,7 @@ public static class COM_UTILS {
         );
     }
 
-    public static string c_RESPONDER_CANTO = "00000011"; 
+    public static string c_RESPONDER_CANTO = "11000011"; 
     public static string RESPONDER_CANTO(string e, string D, string canto, bool resp){
         // TT(8) E(3) D(3) Equipo(1) Respuesta(1)
         return string.Format("{0}{1}{2}{3}{4}", 
@@ -180,7 +187,7 @@ public static class COM_UTILS {
         );
     }
 
-    public static string c_REPARTIENDO_CARTAS = "00000100"; 
+    public static string c_REPARTIENDO_CARTAS = "11000100"; 
     public static string REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3, string vira){
         // TT(8) E(3) D(3) C1(6), C2, C3, Vira
         return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
@@ -194,7 +201,7 @@ public static class COM_UTILS {
         );
     }
 
-    public static string c_ELLOS_TIENEN_FLOR = "00000101"; 
+    public static string c_ELLOS_TIENEN_FLOR = "11000101"; 
     public static string ELLOS_TIENEN_FLOR(bool florA, bool florB, bool florC, bool florD){
         // TT(8) E(3) D(3) FlorA(1), FlorB, FlorC, FlorD
         return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
@@ -208,9 +215,4 @@ public static class COM_UTILS {
         );
     }
 
-    
-
-
-
-    
 }
