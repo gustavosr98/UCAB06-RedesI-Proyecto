@@ -27,7 +27,7 @@ public class Comunicacion : MonoBehaviour {
     public bool modoReal = false;
 
     // COMPONENTES
-    Button btnEnviar, btnConectar, btnReal;
+    Button btnEnviar, btnConectar, btnReal, btnEmpezar;
     Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
     InputField inEnviar, inRecibido;
 
@@ -55,8 +55,10 @@ public class Comunicacion : MonoBehaviour {
 
         log = GameObject.Find("Logica").GetComponent<Logica>();
         dropJugador = GameObject.Find("DropJugador").GetComponent<Dropdown>();
-        
-        GameObject.Find("BtnEmpezar").GetComponent<Button>().onClick.AddListener(establecerJugador);
+
+        btnEmpezar = GameObject.Find("BtnEmpezar").GetComponent<Button>();
+        btnEmpezar.onClick.AddListener(establecerJugador);
+        btnEmpezar.interactable = false;
     }
 
     public void buscarPuertos(){
@@ -111,6 +113,7 @@ public class Comunicacion : MonoBehaviour {
                     if (!modoReal) puertoB.Open();
                     btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
                     btnEnviar.interactable = true;
+                    btnEmpezar.interactable = true;
                 }
                 catch (Exception error) {
                     Debug.LogError(error.Message.ToString());
