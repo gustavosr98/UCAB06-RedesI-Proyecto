@@ -46,9 +46,9 @@ public class LOG_Ronda : MonoBehaviour {
         ui.mesa.jugador2.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(2,3);} );
         ui.mesa.jugador3.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,1);} );
         ui.mesa.jugador3.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,2);} );
-        ui.mesa.jugador3.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,3);} );
-        ui.mesa.jugador4.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,3);} );
-        ui.mesa.jugador4.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,3);} );
+        ui.mesa.jugador3.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
+        ui.mesa.jugador4.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,1);} );
+        ui.mesa.jugador4.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,2);} );
         ui.mesa.jugador4.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(4,3);} );
         //repartirCartasAleatorio();
     }
@@ -74,8 +74,9 @@ public class LOG_Ronda : MonoBehaviour {
 
     public void terminarRonda(){
         string personaGanador = cartaFuerte.gameObject.name.Substring(7,1);
-        Debug.Log( personaGanador);
         if ( log.partida.ronda1.ToLower().Contains("Ronda Actual".ToLower()) ){
+            print("Ganador de la ronda");
+            Debug.Log(personaGanador);
             if( personaGanador == "1" || personaGanador == "3"){
                 log.partida.ronda1 = "AC";
                 ui.info.set_ronda1(log.partida.ronda1); 
@@ -98,8 +99,11 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1);
 
             }
+            log.partida.ronda2 = "Ronda Actual";
         }
         else if ( log.partida.ronda2.ToLower().Contains("Ronda Actual".ToLower()) ){
+            print("Ganador de la ronda");
+            Debug.Log(personaGanador);
             if( personaGanador == "1" || personaGanador == "3"){
                 log.partida.ronda2 = "AC";
                 ui.info.set_ronda2(log.partida.ronda2);       
@@ -122,8 +126,12 @@ public class LOG_Ronda : MonoBehaviour {
                 log.partida.ronda2 = "Empate";
                 ui.info.set_ronda2(log.partida.ronda2);              
             }
+            log.partida.ronda3 = "Ronda Actual";
+
         }
         else if ( log.partida.ronda3.ToLower().Contains("Ronda Actual".ToLower()) ){
+            print("Ganador de la ronda");
+            Debug.Log(personaGanador);
             if( personaGanador == "1" || personaGanador == "3"){
                 log.partida.ronda3 = "AC";
                 ui.info.set_ronda3(log.partida.ronda3);              
@@ -138,11 +146,11 @@ public class LOG_Ronda : MonoBehaviour {
                 log.partida.ronda3 = "Empate";
                 ui.info.set_ronda3(log.partida.ronda3);              
             }
+            log.partida.mano = "B";
         }
-        darTurnoMano();
-        Debug.Log( log.partida.ronda1 );
-
-        
+        Debug.Log(cartaFuerte.numero);
+        cartaFuerte = null;
+        darTurnoMano();       
 
     }
 
