@@ -182,6 +182,18 @@ public class Comunicacion : MonoBehaviour {
         }
     }
     
+    public void REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3, string vira){
+        inEnviar.text = COM_UTILS.REPARTIENDO_CARTAS(D, carta1, carta2, carta3, vira);
+        Debug.Log("---> REPARTIENDO_CARTAS : " + inEnviar.text);
+        enviarBtn();
+    }
+
+    public void JUGAR_CARTA(string e, string ca){
+        inEnviar.text = COM_UTILS.JUGAR_CARTA(e, ca);
+        Debug.Log("---> JUGAR_CARTA : " + inEnviar.text);
+
+    }
+
     // RECIBIR DATOS
     void Update(){
         try {
@@ -228,6 +240,7 @@ public class Comunicacion : MonoBehaviour {
     }
     void doREPARTIENDO_CARTAS(string mensajeBin){
         Debug.Log(" <--- doREPARTIENDO_CARTAS : " + mensajeBin);
+        Debug.Log( mensajeBin.Substring(12, 3) );
     }
     void doELLOS_TIENEN_FLOR(string mensajeBin){
         Debug.Log(" <--- doELLOS_TIENEN_FLOR : " + mensajeBin);
