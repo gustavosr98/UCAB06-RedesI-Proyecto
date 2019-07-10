@@ -27,9 +27,9 @@ public class Comunicacion : MonoBehaviour {
     public bool modoReal = false;
 
     // COMPONENTES
-    Button btnEnviar, btnConectar, btnReal, btnEmpezar;
-    Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
-    InputField inEnviar, inRecibido;
+    public Button btnEnviar, btnConectar, btnReal, btnEmpezar;
+    public Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
+    public InputField inEnviar, inRecibido;
 
     void Start(){
         strBufferIn = "";
@@ -42,6 +42,7 @@ public class Comunicacion : MonoBehaviour {
         btnConectar = GameObject.Find("BtnConectar").GetComponent<Button>();
         btnConectar.interactable = false;
         btnConectar.onClick.AddListener(conectar);
+        btnConectar.onClick.AddListener(establecerJugador);
 
         btnReal = GameObject.Find("BtnSerialReal").GetComponent<Button>();
         btnReal.onClick.AddListener(toogleReal);
@@ -57,7 +58,6 @@ public class Comunicacion : MonoBehaviour {
         dropJugador = GameObject.Find("DropJugador").GetComponent<Dropdown>();
 
         btnEmpezar = GameObject.Find("BtnEmpezar").GetComponent<Button>();
-        btnEmpezar.onClick.AddListener(establecerJugador);
         btnEmpezar.interactable = false;
     }
 
@@ -114,6 +114,7 @@ public class Comunicacion : MonoBehaviour {
                     btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
                     btnEnviar.interactable = true;
                     btnEmpezar.interactable = true;
+                    dropJugador.interactable = false;
                 }
                 catch (Exception error) {
                     Debug.LogError(error.Message.ToString());
@@ -125,6 +126,8 @@ public class Comunicacion : MonoBehaviour {
                 if (!modoReal) puertoB.Close();
                 btnConectar.gameObject.GetComponentInChildren<Text>().text = "Conectar";
                 btnEnviar.interactable = false;
+                btnEmpezar.interactable = false;
+                dropJugador.interactable = true;
             }
         } catch (Exception error) {
             Debug.LogError(error.Message.ToString());
