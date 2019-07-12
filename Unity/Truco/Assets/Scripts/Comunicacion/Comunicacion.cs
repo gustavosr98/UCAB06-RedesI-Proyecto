@@ -272,7 +272,6 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse( carta3.Substring(0, carta3.Length-1) )
             );
-            ui.mesa.jugador1.activarJugador();
         } else if (player == "B") {
             ui.mesa.jugador2.asignarCartas(
                 carta1.Substring(carta1.Length-1,1),
@@ -282,7 +281,6 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
-            ui.mesa.jugador2.activarJugador();
         } else if (player == "C") {
             ui.mesa.jugador3.asignarCartas(
                 carta1.Substring(carta1.Length-1,1),
@@ -292,7 +290,6 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
-            ui.mesa.jugador3.activarJugador();
 
        }   else if (player == "D") {
             ui.mesa.jugador4.asignarCartas(
@@ -303,7 +300,6 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta1.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
-            ui.mesa.jugador4.activarJugador();
        }
     }
     void doVIRA(string mensajeBin){

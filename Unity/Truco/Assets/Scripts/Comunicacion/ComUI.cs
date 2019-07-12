@@ -51,11 +51,13 @@ public  class ComUI : MonoBehaviour {
             );
             yield return new WaitForSecondsRealtime(1);
 
-            com.REPARTIENDO_CARTAS(
-                "A",
-                cartasRepartidas[0],
-                cartasRepartidas[1],
-                cartasRepartidas[2]
+            ui.mesa.jugador1.asignarCartas(
+                cartasRepartidas[0].Substring(cartasRepartidas[0].Length - 1, 1),
+                int.Parse(cartasRepartidas[0].Substring(0, cartasRepartidas[0].Length - 1)),
+                cartasRepartidas[1].Substring(cartasRepartidas[1].Length - 1, 1),
+                int.Parse(cartasRepartidas[1].Substring(0, cartasRepartidas[1].Length - 1)),
+                cartasRepartidas[2].Substring(cartasRepartidas[2].Length - 1, 1),
+                int.Parse(cartasRepartidas[2].Substring(0, cartasRepartidas[2].Length - 1))
             );
 
             yield return new WaitForSecondsRealtime(1);
