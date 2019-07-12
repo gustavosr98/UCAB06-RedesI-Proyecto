@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MesaScene.unity
-    guid: 2dcc4eeb80a1567448e35c9b62189d12
+    path: Assets/Scenes/MesaScene_Tato.unity
+    guid: f445356c080c44b47b797b671abd2567
   m_configObjects: {}

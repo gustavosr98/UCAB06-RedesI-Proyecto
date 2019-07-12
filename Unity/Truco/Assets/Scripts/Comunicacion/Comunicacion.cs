@@ -10,7 +10,8 @@ using UnityEngine.UI;
 using System;
 
 public class Comunicacion : MonoBehaviour {
-    public Logica logica;
+    public Logica log;
+    public Interfaz ui;
        
     // PUERTO SERIAL
     private string strBufferIn;
@@ -27,14 +28,18 @@ public class Comunicacion : MonoBehaviour {
     public bool modoReal = false;
 
     // COMPONENTES
-    Button btnEnviar, btnConectar, btnReal;
-    Dropdown dropPuertosA, dropPuertosB, dropVelocidad;
-    InputField inEnviar, inRecibido;
+    public Button btnEnviar, btnConectar, btnReal, btnEmpezar;
+    public Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
+    public InputField inEnviar, inRecibido;
 
+
+   
     void Start(){
         strBufferIn = "";
         strBufferOut = "";
-        
+
+        ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
+
         btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
         btnEnviar.interactable = false;
         btnEnviar.onClick.AddListener(enviarBtn);
@@ -42,6 +47,7 @@ public class Comunicacion : MonoBehaviour {
         btnConectar = GameObject.Find("BtnConectar").GetComponent<Button>();
         btnConectar.interactable = false;
         btnConectar.onClick.AddListener(conectar);
+        btnConectar.onClick.AddListener(establecerJugador);
 
         btnReal = GameObject.Find("BtnSerialReal").GetComponent<Button>();
         btnReal.onClick.AddListener(toogleReal);
@@ -52,6 +58,12 @@ public class Comunicacion : MonoBehaviour {
 
         inEnviar = GameObject.Find("InEnviar").GetComponent<InputField>();
         inRecibido = GameObject.Find("InRecibido").GetComponent<InputField>();
+
+        log = GameObject.Find("Logica").GetComponent<Logica>();
+        dropJugador = GameObject.Find("DropJugador").GetComponent<Dropdown>();
+
+        btnEmpezar = GameObject.Find("BtnEmpezar").GetComponent<Button>();
+        btnEmpezar.interactable = false;
     }
 
     public void buscarPuertos(){
@@ -72,6 +84,9 @@ public class Comunicacion : MonoBehaviour {
         dropPuertosB.AddOptions(puertosDisponiblesList);
     }
 
+    public void establecerJugador(){
+        log.juego.jugador = dropJugador.options[dropJugador.value].text; 
+    }
 
     public void conectar()
     {
@@ -103,6 +118,8 @@ public class Comunicacion : MonoBehaviour {
                     if (!modoReal) puertoB.Open();
                     btnConectar.gameObject.GetComponentInChildren<Text>().text = "Desconectar";
                     btnEnviar.interactable = true;
+                    btnEmpezar.interactable = true;
+                    dropJugador.interactable = false;
                 }
                 catch (Exception error) {
                     Debug.LogError(error.Message.ToString());
@@ -114,6 +131,8 @@ public class Comunicacion : MonoBehaviour {
                 if (!modoReal) puertoB.Close();
                 btnConectar.gameObject.GetComponentInChildren<Text>().text = "Conectar";
                 btnEnviar.interactable = false;
+                btnEmpezar.interactable = false;
+                dropJugador.interactable = true;
             }
         } catch (Exception error) {
             Debug.LogError(error.Message.ToString());
@@ -140,7 +159,8 @@ public class Comunicacion : MonoBehaviour {
         try {
             puertoA.DiscardOutBuffer();
             strBufferOut = inEnviar.text;
-            Debug.Log("Comunicacion.enviarBtn( " + inEnviar.text + " )");
+            Debug.Log("Comunicacion.enviarBtn( " + strBufferOut + " ) (BIN)");
+            Debug.Log("Comunicacion.enviarBtn( " + COM_UTILS.BinaryToHex(strBufferOut) + " ) (HEX)");
             lastMsj = COM_UTILS.BinaryToHex(strBufferOut);
             puertoA.Write(
                COM_UTILS.BinaryToHex(strBufferOut)
@@ -168,6 +188,26 @@ public class Comunicacion : MonoBehaviour {
         }
     }
     
+    public void REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3){
+        Debug.Log("com.REPARTIENDO_CARTAS("+ D +","+  carta1 +","+ carta2 +","+ carta3 + ")");
+        inEnviar.text = COM_UTILS.REPARTIENDO_CARTAS(D, carta1, carta2, carta3);
+        Debug.Log("---> REPARTIENDO_CARTAS : " + inEnviar.text);
+        enviarBtn();
+    }
+
+    public void VIRA(string vira){
+        Debug.Log("com.VIRA(" + vira + ")");
+        inEnviar.text = COM_UTILS.VIRA(vira);
+        Debug.Log("---> VIRA : " + inEnviar.text);
+        enviarBtn();
+    }
+
+    public void JUGAR_CARTA(string e, string ca){
+        Debug.Log("com.JUGAR_CARTA(" + e + "," + ca + ")");
+        inEnviar.text = COM_UTILS.JUGAR_CARTA(e, ca);
+        Debug.Log("---> JUGAR_CARTA : " + inEnviar.text);
+    }
+
     // RECIBIR DATOS
     void Update(){
         try {
@@ -200,6 +240,8 @@ public class Comunicacion : MonoBehaviour {
             doREPARTIENDO_CARTAS(mensajeBin);
         } else if (TT == COM_UTILS.c_ELLOS_TIENEN_FLOR){
             doELLOS_TIENEN_FLOR(mensajeBin);
+        } else if (TT == COM_UTILS.c_VIRA){
+            doVIRA(mensajeBin);
         }
     }
 
@@ -214,6 +256,66 @@ public class Comunicacion : MonoBehaviour {
     }
     void doREPARTIENDO_CARTAS(string mensajeBin){
         Debug.Log(" <--- doREPARTIENDO_CARTAS : " + mensajeBin);
+        //11000100 000 001 101111110111010011
+        string player = COM_UTILS.EToString( mensajeBin.Substring(11,3) );
+        string carta1 = COM_UTILS.CartaToString(mensajeBin.Substring(14, 6));
+        string carta2 = COM_UTILS.CartaToString(mensajeBin.Substring(20, 6));
+        string carta3 = COM_UTILS.CartaToString(mensajeBin.Substring(26, 6));
+
+        Debug.Log("--- Asignar cartas a "+ player + " - " + carta1 +" - " +carta2 +" - "+ carta3+")");
+        if ( player == "A" ){
+            ui.mesa.jugador1.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse( carta1.Substring(0, carta1.Length-1) ),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse( carta2.Substring(0, carta2.Length-1) ),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse( carta3.Substring(0, carta3.Length-1) )
+            );
+            ui.mesa.jugador1.activarJugador();
+        } else if (player == "B") {
+            ui.mesa.jugador2.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+            ui.mesa.jugador2.activarJugador();
+        } else if (player == "C") {
+            ui.mesa.jugador3.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+            ui.mesa.jugador3.activarJugador();
+
+       }   else if (player == "D") {
+            ui.mesa.jugador4.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta1.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta1.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+            ui.mesa.jugador4.activarJugador();
+       }
+    }
+    void doVIRA(string mensajeBin){
+        Debug.Log(" <--- doVIRA : " + mensajeBin);
+
+        char[] trimCharsA = { 'E', 'O', 'C', 'B' };
+        char[] trimCharsB = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+        string viraS = COM_UTILS.CartaToString( mensajeBin.Substring(14,6) );
+        ui.vira.darValor(
+            viraS.Trim(trimCharsB),
+            int.Parse(viraS.Trim(trimCharsA))
+        );
     }
     void doELLOS_TIENEN_FLOR(string mensajeBin){
         Debug.Log(" <--- doELLOS_TIENEN_FLOR : " + mensajeBin);
