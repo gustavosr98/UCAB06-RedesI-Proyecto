@@ -6,7 +6,12 @@ using System;
 using UnityEngine.UI;
 
 public class UI_Apuestas : MonoBehaviour{
-    public Button BtnTruco,BtnTrucoSi,BtnTrucoNo,BtnEnvido,BtnEnvidoSi,BtnEnvidoNo;
+    public Button BtnTruco;
+    public Button BtnTrucoSi;
+    public Button BtnTrucoNo;
+    public Button BtnEnvido;
+    public Button BtnEnvidoSi;
+    public Button BtnEnvidoNo;
 
     public bool cond;
     public string trucoActual = "Normal";
@@ -68,6 +73,7 @@ public class UI_Apuestas : MonoBehaviour{
             trucoActual =  "Vale Juego";
         }
         else if(trucoActual.Equals("Vale Juego")){
+            trucoActual = "Ultimo";
             desactivarBtnTrucoSi();
             desactivarBtnTrucoNo();
             desactivarTruco();
