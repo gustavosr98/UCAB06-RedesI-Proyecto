@@ -122,8 +122,6 @@ public class Comunicacion : MonoBehaviour {
                     dropJugador.interactable = false;
                 }
                 catch (Exception error) {
-                    Debug.LogError(error.Message.ToString());
-                    throw;
                 }
             } else {
                 Debug.Log("Comunicacion.desconectar()");
@@ -166,8 +164,7 @@ public class Comunicacion : MonoBehaviour {
                COM_UTILS.BinaryToHex(strBufferOut)
             );
         }
-        catch (Exception error)
-        {
+        catch (Exception error){
             Debug.LogError(error.Message.ToString());
             throw;
         }
@@ -202,10 +199,18 @@ public class Comunicacion : MonoBehaviour {
         enviarBtn();
     }
 
-    public void JUGAR_CARTA(string e, string ca){
-        Debug.Log("com.JUGAR_CARTA(" + e + "," + ca + ")");
-        inEnviar.text = COM_UTILS.JUGAR_CARTA(e, ca);
+    public void TURNO(int turno){
+        Debug.Log("com.TURNO(" + turno + ")");
+        inEnviar.text = COM_UTILS.TURNO(turno);
+        Debug.Log("---> TURNO : " + inEnviar.text);
+        enviarBtn();
+    }
+
+    public void JUGAR_CARTA(string e, string ca, string posicion){
+        Debug.Log("com.JUGAR_CARTA(" + e + "," + ca + "," + posicion + ")");
+        inEnviar.text = COM_UTILS.JUGAR_CARTA(e, ca, posicion);
         Debug.Log("---> JUGAR_CARTA : " + inEnviar.text);
+        enviarBtn();
     }
 
     // RECIBIR DATOS
@@ -242,12 +247,39 @@ public class Comunicacion : MonoBehaviour {
             doELLOS_TIENEN_FLOR(mensajeBin);
         } else if (TT == COM_UTILS.c_VIRA){
             doVIRA(mensajeBin);
+        } else if (TT == COM_UTILS.c_TURNO){
+            doTURNO(mensajeBin);
         }
     }
 
     void doJUGAR_CARTA(string mensajeBin){
         Debug.Log(" <--- doJUGAR_CARTA : " + mensajeBin);
+        //11000001 000 111 101111 011 
+        string player = COM_UTILS.EToString(mensajeBin.Substring(8, 3));
+        string carta = COM_UTILS.CartaToString(mensajeBin.Substring(14, 6));
+        string posicion = mensajeBin.Substring(20, 3);
+        int pos = posicion == "011" ? 3 : posicion == "010" ? 2 : 1;
+
+        Debug.Log("--- Asignar cartas a " + player + " - " + carta + " - " + posicion +")");
+        if (player == "A"){
+            log.ronda.jugarCarta(1, pos, false);
+            ui.mesa.jugador1.jugarCarta(1, pos);
+        }
+        else if (player == "B"){
+            log.ronda.jugarCarta(2, pos, false);
+            ui.mesa.jugador2.jugarCarta(2, pos);
+        }
+        else if (player == "C"){
+            log.ronda.jugarCarta(3, pos, false);
+            ui.mesa.jugador3.jugarCarta(3, pos);
+        }
+        else if (player == "D"){
+            log.ronda.jugarCarta(4, pos, false);
+            ui.mesa.jugador4.jugarCarta(4, pos);
+
+        }
     }
+
     void doPEDIR_CANTO(string mensajeBin){
         Debug.Log(" <--- doPEDIR_CANTO : " + mensajeBin);
     }
@@ -317,4 +349,15 @@ public class Comunicacion : MonoBehaviour {
         Debug.Log(" <--- doELLOS_TIENEN_FLOR : " + mensajeBin);
     }
 
+    void doTURNO(string mensajeBin){
+        Debug.Log(" <--- doTURNO : " + mensajeBin);
+
+        string turno = mensajeBin.Substring(8, 3) == "001" ? "A" :
+                    mensajeBin.Substring(8, 3) == "010" ? "B" :
+                    mensajeBin.Substring(8, 3) == "011" ? "C" :
+                    "D";
+
+        log.ronda.permitirJugada(turno);
+        
+    }
 }

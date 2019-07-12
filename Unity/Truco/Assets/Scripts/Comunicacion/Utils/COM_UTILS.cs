@@ -279,14 +279,15 @@ public static class COM_UTILS {
 
     // MENSAJES
     public static string c_JUGAR_CARTA = "11000001"; 
-    public static string JUGAR_CARTA(string e, string carta){
+    public static string JUGAR_CARTA(string e, string carta, string posicion){
         // TT(8) E(3) D(3) Carta(6) == 20
-        return string.Format("{0}{1}{2}{3}{4}", 
+        return string.Format("{0}{1}{2}{3}{4}{5}", 
             c_JUGAR_CARTA,
             E(e),
             "111",
             Carta(carta),
-            "000000000000" //LONGITUD QUE LE FALTA PARA LLEGAR A 32 BITS (LONG FIJA DE TRAMA)
+            posicion,
+            "000000000" //LONGITUD QUE LE FALTA PARA LLEGAR A 32 BITS (LONG FIJA DE TRAMA)
         );
     }
 
@@ -354,4 +355,18 @@ public static class COM_UTILS {
             "000000000000"
         );
     }
+
+    public static string c_TURNO = "11000111";
+    public static string TURNO(int turno){
+        // TT(8) T(3) = 11 
+        return string.Format("{0}{1}",
+            c_TURNO,
+            turno == 1 ? "001" :
+            turno == 2 ? "010" :
+            turno == 3 ? "011" :
+                "100",
+            "0000000000000000000"
+        );
+    }
+
 }
