@@ -11220,6 +11220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656500294}
   - component: {fileID: 1656500293}
+  - component: {fileID: 1656500295}
   m_Layer: 5
   m_Name: Comunicacion
   m_TagString: Untagged
@@ -11239,13 +11240,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c0e8ae3e2ce7e2428ac8b7e6f1181ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logica: {fileID: 0}
+  log: {fileID: 0}
   lastMsj: 
   tipo: 
   puertoTx: 
   puertoRx: 
   velocidad: 
   modoReal: 0
+  btnEnviar: {fileID: 0}
+  btnConectar: {fileID: 0}
+  btnReal: {fileID: 0}
+  btnEmpezar: {fileID: 0}
+  dropPuertosA: {fileID: 0}
+  dropPuertosB: {fileID: 0}
+  dropVelocidad: {fileID: 0}
+  dropJugador: {fileID: 0}
+  inEnviar: {fileID: 0}
+  inRecibido: {fileID: 0}
 --- !u!224 &1656500294
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11265,6 +11276,20 @@ RectTransform:
   m_AnchoredPosition: {x: 7830.8853, y: 590.135}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1656500295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1656500292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8f62f802bd06c43864cd698ad40285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pinta: 
+  numero: 0
 --- !u!1 &1685719484
 GameObject:
   m_ObjectHideFlags: 0

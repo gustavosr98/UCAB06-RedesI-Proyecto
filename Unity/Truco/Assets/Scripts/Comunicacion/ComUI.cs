@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+using System.Threading;
 public  class ComUI : MonoBehaviour {
     Interfaz ui;
     Logica log;
     Comunicacion com;
+
+    public string pinta;
+    public int numero;
 
     void Start(){
         log = GameObject.Find("Logica").GetComponent<Logica>();
@@ -15,7 +18,9 @@ public  class ComUI : MonoBehaviour {
         ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
 
         GameObject.Find("BtnEmpezar").GetComponent<Button>().onClick.AddListener(repartirCartas);
+
     }
+
     public void repartirCartas(){
         StartCoroutine( waitRepartirCartas() );
     }
@@ -68,12 +73,6 @@ public  class ComUI : MonoBehaviour {
             );
 
             log.ronda.activarJugadores(log.partida.mano);
-        }
-    }
-
-    public void jugarCarta() {
-        if(log.juego.jugador == "A"){
-            //com.JUGAR_CARTA("A", );
         }
     }
     

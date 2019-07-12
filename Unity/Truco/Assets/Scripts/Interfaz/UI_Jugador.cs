@@ -21,10 +21,10 @@ public class UI_Jugador : MonoBehaviour{
     public int cont1= 0,cont2 = 0,cont3 = 0,cont4 = 0;
 
     void Start() {
-
+        
     }
 
-    public void instanciarCarta(int jug, float x, float y, int carta) {
+    public void instanciarCarta(int jug, int carta) {
         Debug.Log("UI_Jugador.instanciarCarta()");
         switch(carta) {
             case 1: goCarta1 = Instantiate(cartaPrefab);
