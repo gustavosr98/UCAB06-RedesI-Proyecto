@@ -30,33 +30,6 @@ public static class COM_UTILS {
         return binaryval;
     }
 
-    public static string BinaryToBase64(string binary){
-        string aux = binary;
-        string output = "";
-        for( int i = 0; i < binary.Length ; i++ ){
-            output = output + ByteToBase64( aux.Substring( i*8 , (i+1)*8 ) );
-        }
-
-        return output;
-    }
-
-    public static string ByteToBase64(string x){
-        int aux = 0;
-        for (int i = 0; i < x.Length; i++)
-            aux = aux + int.Parse( x[ x.Length - i -1].ToString() )^i;
-
-        return aux.ToString();
-    }
-
-    public static string Prueba(string x){
-        byte[] data = { (byte) 0xB6, (byte) 0x79, (byte) 0xC0, (byte) 0xAF,
-                (byte) 0x18, (byte) 0xF4, (byte) 0xE9, (byte) 0xC5,
-                (byte) 0x87, (byte) 0xAB, (byte) 0x8E, (byte) 0x20,
-                (byte) 0x0A, (byte) 0xCD, (byte) 0x4E, (byte) 0x48,
-                (byte) 0xA9, (byte) 0x3F, (byte) 0x8C, (byte) 0xB6 };
-
-        return Convert.ToBase64String(data);
-    }
     // ATRIBUTOS EN MENSAJES
     public static string E(string emisor){
         if ( emisor == "A")

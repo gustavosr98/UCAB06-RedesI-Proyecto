@@ -81,6 +81,7 @@ public class UI_Jugador : MonoBehaviour{
         }
     }
 
+
     public void asignarCartas(string pinta1, int numero1, string pinta2, int numero2, string pinta3, int numero3) {
         carta1.darValor(pinta1, numero1);
         carta2.darValor(pinta2, numero2);
