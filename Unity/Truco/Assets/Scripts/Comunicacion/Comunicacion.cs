@@ -11,6 +11,7 @@ using System;
 
 public class Comunicacion : MonoBehaviour {
     public Logica log;
+    public Interfaz ui;
        
     // PUERTO SERIAL
     private string strBufferIn;
@@ -36,6 +37,8 @@ public class Comunicacion : MonoBehaviour {
     void Start(){
         strBufferIn = "";
         strBufferOut = "";
+
+        ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
 
         btnEnviar = GameObject.Find("BtnEnviar").GetComponent<Button>();
         btnEnviar.interactable = false;
@@ -254,11 +257,62 @@ public class Comunicacion : MonoBehaviour {
     }
     void doREPARTIENDO_CARTAS(string mensajeBin){
         Debug.Log(" <--- doREPARTIENDO_CARTAS : " + mensajeBin);
-        Debug.Log( mensajeBin.Substring(12, 3) );
+        //11000100 000 001 101111110111010011
+        string player = COM_UTILS.EToString( mensajeBin.Substring(11,3) );
+        string carta1 = COM_UTILS.CartaToString(mensajeBin.Substring(14, 6));
+        string carta2 = COM_UTILS.CartaToString(mensajeBin.Substring(20, 6));
+        string carta3 = COM_UTILS.CartaToString(mensajeBin.Substring(26, 6));
+
+        Debug.Log("--- Asignar cartas a "+ player + " - " + carta1 +" - " +carta2 +" - "+ carta3+")");
+        if ( player == "A" ){
+            ui.mesa.jugador1.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse( carta1.Substring(0, carta1.Length-1) ),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse( carta2.Substring(0, carta2.Length-1) ),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse( carta3.Substring(0, carta3.Length-1) )
+            );
+        } else if (player == "B") {
+            ui.mesa.jugador2.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+        } else if (player == "C") {
+            ui.mesa.jugador3.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta2.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta3.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+
+       }   else if (player == "D") {
+            ui.mesa.jugador4.asignarCartas(
+                carta1.Substring(carta1.Length-1,1),
+                int.Parse(carta1.Substring(0, carta1.Length-1)),
+                carta2.Substring(carta1.Length-1,1),
+                int.Parse(carta2.Substring(0, carta2.Length-1)),
+                carta3.Substring(carta1.Length-1,1),
+                int.Parse(carta3.Substring(0, carta3.Length-1))
+            );
+       }
     }
     void doVIRA(string mensajeBin){
         Debug.Log(" <--- doVIRA : " + mensajeBin);
-        Debug.Log(mensajeBin.Substring(12, 3));
+
+        char[] trimCharsA = { 'E', 'O', 'C', 'B' };
+        char[] trimCharsB = { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+        string viraS = COM_UTILS.CartaToString( mensajeBin.Substring(14,6) );
+        ui.vira.darValor(
+            viraS.Trim(trimCharsB),
+            int.Parse(viraS.Trim(trimCharsA))
+        );
     }
     void doELLOS_TIENEN_FLOR(string mensajeBin){
         Debug.Log(" <--- doELLOS_TIENEN_FLOR : " + mensajeBin);

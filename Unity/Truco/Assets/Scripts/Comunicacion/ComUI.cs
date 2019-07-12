@@ -29,7 +29,9 @@ public  class ComUI : MonoBehaviour {
             List<string> cartasRepartidas = new List<string>();
 
             cartasRepartidas = log.ronda.repartirCartasAleatorio();
-            
+           
+            yield return new WaitForSecondsRealtime(1);
+
             com.REPARTIENDO_CARTAS(
                 "B",
                 cartasRepartidas[3],
@@ -53,6 +55,17 @@ public  class ComUI : MonoBehaviour {
                 cartasRepartidas[10],
                 cartasRepartidas[11]
             );
+            yield return new WaitForSecondsRealtime(1);
+
+            ui.mesa.jugador1.asignarCartas(
+                cartasRepartidas[0].Substring(cartasRepartidas[0].Length - 1, 1),
+                int.Parse(cartasRepartidas[0].Substring(0, cartasRepartidas[0].Length - 1)),
+                cartasRepartidas[1].Substring(cartasRepartidas[1].Length - 1, 1),
+                int.Parse(cartasRepartidas[1].Substring(0, cartasRepartidas[1].Length - 1)),
+                cartasRepartidas[2].Substring(cartasRepartidas[2].Length - 1, 1),
+                int.Parse(cartasRepartidas[2].Substring(0, cartasRepartidas[2].Length - 1))
+            );
+
             yield return new WaitForSecondsRealtime(1);
 
             com.VIRA(

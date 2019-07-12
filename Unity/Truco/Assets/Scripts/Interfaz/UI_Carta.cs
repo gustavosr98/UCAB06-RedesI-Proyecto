@@ -24,24 +24,20 @@ public class UI_Carta : MonoBehaviour {
     }
     
     public void activarCarta(){
-        Debug.Log("UI_Carta.activarCarta()");
         carta.interactable = true;
     }
 
     public void desactivarCarta(){
-        Debug.Log("UI_Carta.desactivarCarta()");
         carta = gameObject.GetComponent<Button>();
         carta.interactable = false;
     }
 
     public void mostrarCarta(){
-        Debug.Log("UI_Carta.mostrarCarta()");
         Image imagenCarta = gameObject.GetComponent<Image>();
         imagenCarta.sprite = Resources.Load<Sprite>("Sprites/" + pinta + numero);
     }
 
     public void noMostrarCarta(){
-        Debug.Log("UI_Carta.noMostrarCarta()");
         Image imagenCarta = gameObject.GetComponent<Image>();
         imagenCarta.sprite = Resources.Load<Sprite>("Sprites/revez");
     }

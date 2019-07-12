@@ -3614,8 +3614,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1332668623}
-        m_MethodName: darTurno
+      - m_Target: {fileID: 1656500295}
+        m_MethodName: repartirCartas
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12181,6 +12181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   log: {fileID: 0}
+  ui: {fileID: 0}
   lastMsj: 
   tipo: 
   puertoTx: 
