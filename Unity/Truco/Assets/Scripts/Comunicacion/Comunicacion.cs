@@ -203,6 +203,7 @@ public class Comunicacion : MonoBehaviour {
         Debug.Log("com.JUGAR_CARTA(" + e + "," + ca + ")");
         inEnviar.text = COM_UTILS.JUGAR_CARTA(e, ca);
         Debug.Log("---> JUGAR_CARTA : " + inEnviar.text);
+        enviarBtn();
     }
 
     // RECIBIR DATOS

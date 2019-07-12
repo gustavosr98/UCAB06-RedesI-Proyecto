@@ -29,6 +29,7 @@ public class LOG_Ronda : MonoBehaviour {
     void Start() {
         ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
         log = GameObject.Find("Logica").GetComponent<Logica>();
+        com = GameObject.Find("Comunicacion").GetComponent<Comunicacion>();
         vira = GameObject.Find("Vira").GetComponent<UI_Vira>();
         ui.mesa.jugador1.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(1,1);} );
         ui.mesa.jugador1.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(1,2);} );
@@ -328,17 +329,20 @@ public class LOG_Ronda : MonoBehaviour {
                 pinta = ui.mesa.jugador1.carta1.pinta;
                 numero = ui.mesa.jugador1.carta1.numero;
                 revisarMasFuerte(ui.mesa.jugador1.carta1);
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador1.carta2.pinta;
                 numero = ui.mesa.jugador1.carta2.numero;
                 revisarMasFuerte(ui.mesa.jugador1.carta2);
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador1.carta3.pinta;
                 numero = ui.mesa.jugador1.carta3.numero;
                 revisarMasFuerte(ui.mesa.jugador1.carta3);
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
 
         }
@@ -348,20 +352,20 @@ public class LOG_Ronda : MonoBehaviour {
                 pinta = ui.mesa.jugador2.carta1.pinta;
                 numero = ui.mesa.jugador2.carta1.numero;
                 revisarMasFuerte(ui.mesa.jugador2.carta1);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador2.carta2.pinta;
                 numero = ui.mesa.jugador2.carta2.numero;
                 revisarMasFuerte(ui.mesa.jugador2.carta2);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador2.carta3.pinta;
                 numero = ui.mesa.jugador2.carta3.numero;
                 revisarMasFuerte(ui.mesa.jugador2.carta3);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         else if(jugador == 3){
@@ -370,20 +374,20 @@ public class LOG_Ronda : MonoBehaviour {
                 pinta = ui.mesa.jugador3.carta1.pinta;
                 numero = ui.mesa.jugador3.carta1.numero;
                 revisarMasFuerte(ui.mesa.jugador3.carta1);
-                
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);                
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador3.carta2.pinta;
                 numero = ui.mesa.jugador3.carta2.numero;
                 revisarMasFuerte(ui.mesa.jugador3.carta2);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador3.carta3.pinta;
                 numero = ui.mesa.jugador3.carta3.numero;
                 revisarMasFuerte(ui.mesa.jugador3.carta3);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         else if(jugador == 4){
@@ -392,20 +396,20 @@ public class LOG_Ronda : MonoBehaviour {
                 pinta = ui.mesa.jugador4.carta1.pinta;
                 numero = ui.mesa.jugador4.carta1.numero;
                 revisarMasFuerte(ui.mesa.jugador4.carta1);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador4.carta2.pinta;
                 numero = ui.mesa.jugador4.carta2.numero;
                 revisarMasFuerte(ui.mesa.jugador4.carta2);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador4.carta3.pinta;
                 numero = ui.mesa.jugador4.carta3.numero;
                 revisarMasFuerte(ui.mesa.jugador4.carta3);
-
+                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         ui.mesa.desactivarTurno(jugador);
