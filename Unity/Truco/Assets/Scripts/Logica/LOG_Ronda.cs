@@ -10,6 +10,8 @@ public class LOG_Ronda : MonoBehaviour {
     public Comunicacion com;
     public Interfaz ui;
 
+    public int VicAC = 0;
+    public  int VicBD = 0;
     public int puntos = 1;
     public int cont = 0;
     public string pinta;
@@ -88,10 +90,9 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1);
                 log.partida.ronda3 = "Ronda Actual";
                 personaGanador = "0";
-                log.juego.ptsAC = 1;
-                log.juego.ptsBD = 1;
             }
             else if( personaGanador == "1" || personaGanador == "3"){
+                VicAC ++;
                 log.partida.ronda1 = "AC";
                 ui.info.set_ronda1(log.partida.ronda1); 
                 if(personaGanador == "1")
@@ -99,11 +100,9 @@ public class LOG_Ronda : MonoBehaviour {
                 else
                     log.partida.mano = "C";
                 log.partida.ronda2 = "Ronda Actual";
-                if(puntos != 0)
-                    log.juego.ptsAC = puntos;
-                else log.juego.ptsAC = 1;
             }
             else if (personaGanador == "2" || personaGanador == "4"){
+                VicBD ++;
                 log.partida.ronda1 = "BD";
                 ui.info.set_ronda1(log.partida.ronda1);
                 if(personaGanador == "2")
@@ -111,9 +110,6 @@ public class LOG_Ronda : MonoBehaviour {
                 else
                     log.partida.mano = "D";
                 log.partida.ronda2 = "Ronda Actual";
-                if(puntos != 0)
-                    log.juego.ptsBD = puntos;
-                else log.juego.ptsBD = 1;
             }            
         }
         else if ( log.partida.ronda2.ToLower().Contains("Ronda Actual".ToLower()) ){
@@ -122,33 +118,26 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda2(log.partida.ronda2);  
                 log.partida.ronda2 = log.partida.ronda1;
                 personaGanador = "0"; 
-                log.juego.ptsAC = 1;
-                log.juego.ptsBD = 1;  
-
             }
             else if( personaGanador == "1" || personaGanador == "3"){
+                VicAC ++;
                 log.partida.ronda2 = "AC";
                 ui.info.set_ronda2(log.partida.ronda2);       
                 if(personaGanador == "1")
                     log.partida.mano = "A";
                 else
-                    log.partida.mano = "C";
-                if(puntos != 0)
-                    log.juego.ptsAC = puntos;
-                else log.juego.ptsAC = 1;      
-
+                    log.partida.mano = "C";   
+                log.partida.ronda3 = "Ronda Actual";
             }
             else if (personaGanador == "2" || personaGanador == "4"){
+                VicBD ++;
                 log.partida.ronda2 = "BD";
                 ui.info.set_ronda2(log.partida.ronda2);   
                 if(personaGanador == "2")
                     log.partida.mano = "B";
                 else 
                     log.partida.mano = "D";  
-                if(puntos != 0)
-                    log.juego.ptsBD = puntos;
-                else log.juego.ptsBD = 1;         
-
+                log.partida.ronda3 = "Ronda Actual";
             }
             log.partida.ronda3 = "Ronda Actual";
 
@@ -158,23 +147,26 @@ public class LOG_Ronda : MonoBehaviour {
                 log.partida.ronda3 = "Empate";
                 ui.info.set_ronda3(log.partida.ronda3); 
                 personaGanador = "0";
-                log.juego.ptsAC = 1;
-                log.juego.ptsBD = 1;
             }
             else if( personaGanador == "1" || personaGanador == "3"){
+                VicAC ++;
                 log.partida.ronda3 = "AC";
-                ui.info.set_ronda3(log.partida.ronda3);
-                 if(puntos != 0)
-                    log.juego.ptsAC = puntos;
-                else log.juego.ptsAC = 1;                  
+                ui.info.set_ronda3(log.partida.ronda3);  
+                       
                 
             }
             else if (personaGanador == "2" || personaGanador == "4"){
+                VicBD ++;
                 log.partida.ronda3 = "BD";
                 ui.info.set_ronda3(log.partida.ronda3);  
-                if(puntos != 0)
-                    log.juego.ptsBD = puntos;
-                else log.juego.ptsBD = 1;             
+           
+            }
+            
+            if (VicAC > VicBD){
+                log.juego.ptsAC = puntos;      
+            }
+            else if (VicAC < VicBD){
+                log.juego.ptsBD = puntos;                
             }
             ui.info.set_ptsAC(log.juego.ptsAC);
             ui.info.set_ptsBD(log.juego.ptsBD);
@@ -419,14 +411,12 @@ public class LOG_Ronda : MonoBehaviour {
             ui.apuesta.desactivarBtnTrucoSi();
             ui.apuesta.desactivarBtnTrucoNo();
             if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Truco")
-                puntos = 1;
-            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Retruco")
                 puntos = 3;
-            else if (ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Vale 9")
+            else if (ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "retruco")
                 puntos = 6;
-            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Vale Juego")
+            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "vale 9")
                 puntos = 9;
-            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Ultimo")
+            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "vale partida")
                 puntos = 24;
         }
         else{
