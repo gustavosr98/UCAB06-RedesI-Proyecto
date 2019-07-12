@@ -72,7 +72,7 @@ public  class ComUI : MonoBehaviour {
                 cartasRepartidas[12]
             );
 
-            log.ronda.activarJugadores();
+            log.ronda.activarJugadores(log.partida.mano);
         }
     }
     

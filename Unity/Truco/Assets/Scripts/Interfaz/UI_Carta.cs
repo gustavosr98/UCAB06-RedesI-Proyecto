@@ -21,6 +21,8 @@ public class UI_Carta : MonoBehaviour {
         Debug.Log("UI_Carta.darValor( " + pinta + " , " + numero + " )");
         this.pinta = pinta;
         this.numero = numero;
+        Image imagenCarta = gameObject.GetComponent<Image>();
+        imagenCarta.sprite = Resources.Load<Sprite>("Sprites/" + pinta + numero);
     }
     
     public void activarCarta(){
