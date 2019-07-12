@@ -10,19 +10,23 @@ public class LOG_Partida : MonoBehaviour {
     
     // DATOS DEL PARTIDA 
     public string nivelTruco = "Normal";
-    public string voz = "Ambos";
+    public string vozActual = "Ambos";
 
-    public string mano = "B";
+   
 
     public bool envido = false;
 
     public string ronda1 = "Ronda Actual";
     public string ronda2 = "Por jugar";
     public string ronda3 = "Por jugar";
+    public string mano = "B";
 
     public UI_Vira vira = new UI_Vira();
+    public UI_Info info = new UI_Info();
 
     void Start(){
+        log = GameObject.Find("Logica").GetComponent<Logica>();
+        log.juego.jugador = mano;        
         // com = GameObject.Find("TODAVIA NO RECUERDO").GetComponent<Comunicacion>();
     }
 
