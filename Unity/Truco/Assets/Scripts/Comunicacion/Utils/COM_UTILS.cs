@@ -307,12 +307,13 @@ public static class COM_UTILS {
     // MENSAJES
     public static string c_JUGAR_CARTA = "11000001"; 
     public static string JUGAR_CARTA(string e, string carta){
-        // TT(8) E(3) D(3) Carta(6)
-        return string.Format("{0}{1}{2}{3}", 
+        // TT(8) E(3) D(3) Carta(6) == 20
+        return string.Format("{0}{1}{2}{3}{4}", 
             c_JUGAR_CARTA,
             E(e),
             "111",
-            Carta(carta)
+            Carta(carta),
+            "000000000000" //LONGITUD QUE LE FALTA PARA LLEGAR A 32 BITS (LONG FIJA DE TRAMA)
         );
     }
 
