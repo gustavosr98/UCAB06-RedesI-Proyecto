@@ -30,6 +30,33 @@ public static class COM_UTILS {
         return binaryval;
     }
 
+    public static string BinaryToBase64(string binary){
+        string aux = binary;
+        string output = "";
+        for( int i = 0; i < binary.Length ; i++ ){
+            output = output + ByteToBase64( aux.Substring( i*8 , (i+1)*8 ) );
+        }
+
+        return output;
+    }
+
+    public static string ByteToBase64(string x){
+        int aux = 0;
+        for (int i = 0; i < x.Length; i++)
+            aux = aux + int.Parse( x[ x.Length - i -1].ToString() )^i;
+
+        return aux.ToString();
+    }
+
+    public static string Prueba(string x){
+        byte[] data = { (byte) 0xB6, (byte) 0x79, (byte) 0xC0, (byte) 0xAF,
+                (byte) 0x18, (byte) 0xF4, (byte) 0xE9, (byte) 0xC5,
+                (byte) 0x87, (byte) 0xAB, (byte) 0x8E, (byte) 0x20,
+                (byte) 0x0A, (byte) 0xCD, (byte) 0x4E, (byte) 0x48,
+                (byte) 0xA9, (byte) 0x3F, (byte) 0x8C, (byte) 0xB6 };
+
+        return Convert.ToBase64String(data);
+    }
     // ATRIBUTOS EN MENSAJES
     public static string E(string emisor){
         if ( emisor == "A")
@@ -314,31 +341,43 @@ public static class COM_UTILS {
     }
 
     public static string c_REPARTIENDO_CARTAS = "11000100"; 
-    public static string REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3, string vira){
-        // TT(8) E(3) D(3) C1(6), C2, C3, Vira
-        return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
+    public static string REPARTIENDO_CARTAS(string D, string carta1, string carta2, string carta3){
+        // TT(8) E(3) D(3) C1(6), C2, C3 == 32
+        return string.Format("{0}{1}{2}{3}{4}{5}", 
             c_REPARTIENDO_CARTAS,
             E("A"),
             E(D),
             Carta(carta1),
             Carta(carta2),
-            Carta(carta3),
-            Carta(vira)
+            Carta(carta3)
         );
     }
 
     public static string c_ELLOS_TIENEN_FLOR = "11000101"; 
     public static string ELLOS_TIENEN_FLOR(bool florA, bool florB, bool florC, bool florD){
-        // TT(8) E(3) D(3) FlorA(1), FlorB, FlorC, FlorD
-        return string.Format("{0}{1}{2}{3}{4}{5}{6}", 
-            c_REPARTIENDO_CARTAS,
+        // TT(8) E(3) D(3) FlorA(1), FlorB, FlorC, FlorD = 18
+        return string.Format("{0}{1}{2}{3}{4}{5}{6}{7}",
+            c_ELLOS_TIENEN_FLOR,
             E("A"),
             "111",
             florA ? "1" : "0",
             florB ? "1" : "0",
             florC ? "1" : "0",
-            florD ? "1" : "0"
+            florD ? "1" : "0",
+            "00000000000000"
         );
     }
 
+    public static string c_VIRA = "11000110";
+    public static string VIRA(string vira)
+    {
+        // TT(8) E(3) D(3) Vira(6) = 20
+        return string.Format("{0}{1}{2}{3}{4}",
+            c_VIRA,
+            E("A"),
+            "111",
+            Carta(vira),
+            "000000000000"
+        );
+    }
 }

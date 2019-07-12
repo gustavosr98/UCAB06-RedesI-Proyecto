@@ -15,34 +15,41 @@ public  class ComUI : MonoBehaviour {
 
         GameObject.Find("BtnEmpezar").GetComponent<Button>().onClick.AddListener(repartirCartas);
     }
-
     public void repartirCartas(){
+        StartCoroutine( waitRepartirCartas() );
+    }
+    IEnumerator waitRepartirCartas(){
         if( log.juego.jugador == "A") {
             List<string> cartasRepartidas = new List<string>();
 
             cartasRepartidas = log.ronda.repartirCartasAleatorio();
-
+            
             com.REPARTIENDO_CARTAS(
                 "B",
                 cartasRepartidas[3],
                 cartasRepartidas[4],
-                cartasRepartidas[5],
-                cartasRepartidas[12]
+                cartasRepartidas[5]
             );
-
+            yield return new WaitForSecondsRealtime(1);
+                    
             com.REPARTIENDO_CARTAS(
                 "C",
                 cartasRepartidas[6],
                 cartasRepartidas[7],
-                cartasRepartidas[8],
-                cartasRepartidas[12]
+                cartasRepartidas[8]
             );
+            yield return new WaitForSecondsRealtime(1);
+
 
             com.REPARTIENDO_CARTAS(
                 "D",
                 cartasRepartidas[9],
                 cartasRepartidas[10],
-                cartasRepartidas[11],
+                cartasRepartidas[11]
+            );
+            yield return new WaitForSecondsRealtime(1);
+
+            com.VIRA(
                 cartasRepartidas[12]
             );
 
