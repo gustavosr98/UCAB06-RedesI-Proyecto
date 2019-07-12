@@ -12,6 +12,7 @@ public  class ComUI : MonoBehaviour {
     void Start(){
         log = GameObject.Find("Logica").GetComponent<Logica>();
         com = GameObject.Find("Comunicacion").GetComponent<Comunicacion>();
+        ui = GameObject.Find("Interfaz").GetComponent<Interfaz>();
 
         GameObject.Find("BtnEmpezar").GetComponent<Button>().onClick.AddListener(repartirCartas);
     }
@@ -66,7 +67,7 @@ public  class ComUI : MonoBehaviour {
                 cartasRepartidas[12]
             );
 
-            log.ronda.activarJugadores();
+            log.ronda.activarJugadores(log.partida.mano);
         }
     }
 
