@@ -42,7 +42,6 @@ public class LOG_Ronda : MonoBehaviour {
         ui.mesa.jugador4.goCarta1.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
         ui.mesa.jugador4.goCarta2.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
         ui.mesa.jugador4.goCarta3.GetComponent<Button>().onClick.AddListener( () => {jugarCarta(3,3);} );
-        repartirCartasAleatorio();
     }
 
     public void revisarMasFuerte(UI_Carta carta){
@@ -186,35 +185,65 @@ public class LOG_Ronda : MonoBehaviour {
     }
     
 
-    public void repartirCartasAleatorio(){
+    public List<string> repartirCartasAleatorio(){
         Carta carta;
+        List<string> cartasRepartidas = new List<string>();
         crearArray();
+        
         carta = generarRandom();
         ui.mesa.jugador1.carta1.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador1.carta1.numero + ui.mesa.jugador1.carta1.pinta);
+        
         carta = generarRandom();
         ui.mesa.jugador1.carta2.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador1.carta2.numero + ui.mesa.jugador1.carta2.pinta);
+        
         carta = generarRandom();
         ui.mesa.jugador1.carta3.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador1.carta3.numero + ui.mesa.jugador1.carta3.pinta);
+        
         carta = generarRandom();
         ui.mesa.jugador2.carta1.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador2.carta1.numero + ui.mesa.jugador2.carta1.pinta);
+        
         carta = generarRandom();
         ui.mesa.jugador2.carta2.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador2.carta2.numero + ui.mesa.jugador2.carta2.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador2.carta3.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador2.carta3.numero + ui.mesa.jugador2.carta3.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador3.carta1.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador3.carta1.numero + ui.mesa.jugador3.carta1.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador3.carta2.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador3.carta2.numero + ui.mesa.jugador3.carta2.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador3.carta3.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador3.carta3.numero + ui.mesa.jugador3.carta3.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador4.carta1.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador4.carta1.numero + ui.mesa.jugador4.carta1.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador4.carta2.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador4.carta2.numero + ui.mesa.jugador4.carta2.pinta);
+
         carta = generarRandom();
         ui.mesa.jugador4.carta3.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.mesa.jugador4.carta3.numero + ui.mesa.jugador4.carta3.pinta);
+
         carta = generarRandom();
         ui.vira.darValor(carta.pinta,carta.numero);
+        cartasRepartidas.Add(ui.vira.numero + ui.vira.pinta);
+
+        return cartasRepartidas;
+
 
         /*
             com.ronda.darCartas("A",
