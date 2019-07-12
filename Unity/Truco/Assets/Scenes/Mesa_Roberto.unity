@@ -9397,9 +9397,11 @@ MonoBehaviour:
   log: {fileID: 0}
   com: {fileID: 0}
   ui: {fileID: 0}
+  puntos: 1
   cont: 0
   pinta: 
   numero: 0
+  vozActual: Ambos
   cartaFuerte: {fileID: 0}
   empate: 0
   vira: {fileID: 0}
@@ -9465,7 +9467,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nivelTruco: Normal
-  voz: Ambos
+  vozActual: Ambos
   envido: 0
   ronda1: Ronda Actual
   ronda2: Por jugar

@@ -3378,7 +3378,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1332668623}
-        m_MethodName: darTurno
+        m_MethodName: repartirCartasAleatorio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9403,6 +9403,8 @@ MonoBehaviour:
   cartaFuerte: {fileID: 0}
   empate: 0
   vira: {fileID: 0}
+  turno: 0
+  info: {fileID: 0}
 --- !u!4 &1332668624
 Transform:
   m_ObjectHideFlags: 0
@@ -9464,12 +9466,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nivelTruco: Normal
   voz: Ambos
-  mano: B
   envido: 0
   ronda1: Ronda Actual
   ronda2: Por jugar
   ronda3: Por jugar
+  mano: B
   vira: {fileID: 0}
+  info: {fileID: 0}
 --- !u!1 &1337031166
 GameObject:
   m_ObjectHideFlags: 0
