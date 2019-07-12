@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_Mesa : MonoBehaviour{
-
+    public Logica log;
     public GameObject jugadorPrefab;
     public GameObject mesa; 
     public GameObject goJugador1;
@@ -36,7 +36,7 @@ public class UI_Mesa : MonoBehaviour{
         instanciarJugador(5500, 0, 2);
         instanciarJugador(0, 3000, 3);
         instanciarJugador(-5500, 0, 4);
-
+		log = GameObject.Find("Logica").GetComponent<Logica>();
     }
 
     public void reiniciarJuego() {
@@ -130,8 +130,21 @@ public class UI_Mesa : MonoBehaviour{
                     break;
         }
     }
+
+    public int toNumber(string x){
+        if ( x == "A")
+                return 1;
+        else if (x == "B")
+                return 2;
+        else if (x == "C")
+                return 3;
+        else if (x == "D")
+                return 4;
+        return 0;
+    }
     public void activarTurno(int jugador) {
         Debug.Log("UI_Mesa.activarTurno()");
+        if ( toNumber(log.juego.jugador) == jugador )
         switch(jugador) {
             case 1: btnTurno1.interactable = true;
                     break;
