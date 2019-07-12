@@ -10,7 +10,7 @@ public class LOG_Partida : MonoBehaviour {
     
     // DATOS DEL PARTIDA 
     public string nivelTruco = "Normal";
-    public string voz = "Ambos";
+    public string vozActual = "Ambos";
 
    
 
@@ -25,11 +25,9 @@ public class LOG_Partida : MonoBehaviour {
     public UI_Info info = new UI_Info();
 
     void Start(){
+        log = GameObject.Find("Logica").GetComponent<Logica>();
+        log.juego.jugador = mano;        
         // com = GameObject.Find("TODAVIA NO RECUERDO").GetComponent<Comunicacion>();
-    }
-
-    public void setearRondas(){
-
     }
 
     // METODOS 
