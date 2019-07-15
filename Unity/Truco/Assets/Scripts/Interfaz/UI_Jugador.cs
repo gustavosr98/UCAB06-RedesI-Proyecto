@@ -113,10 +113,6 @@ public class UI_Jugador : MonoBehaviour{
     }
 
     public void reiniciarJuego(int carta) {
-        posJ1 = new Vector3(0, 0, 0);
-        posJ2 = new Vector3(0, 0, 0);
-        posJ3 = new Vector3(0, 0, 0);
-        posJ4 = new Vector3(0, 0, 0);
         Debug.Log("UI_Jugador.reiniciarJuego()");
         switch(carta) {
             case 1: posicion = jugador.transform.position;
@@ -148,7 +144,7 @@ public class UI_Jugador : MonoBehaviour{
         switch(jugador) {
             case 1: posJ1.x =13900;
                     posJ1.y = 550;
-                    posJ1.z += -100;
+                    //posJ1.z += -100;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posJ1;
                                 //carta1.transform.position = posicion;
@@ -175,7 +171,7 @@ public class UI_Jugador : MonoBehaviour{
                     break;
             case 2: posJ2.x = 16250;
                     posJ2.y = 1750;
-                    posJ2.z += -100;
+                    //posJ2.z += -100;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posJ2;
                                 //carta1.transform.position = posicion;
@@ -202,7 +198,7 @@ public class UI_Jugador : MonoBehaviour{
                     break;
             case 3: posJ3.x = 13900;
                     posJ3.y = 3000;
-                posJ3.z += -100;
+                    //posJ3.z += -100;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posJ3;
                                 //carta1.transform.position = posicion;
@@ -229,7 +225,7 @@ public class UI_Jugador : MonoBehaviour{
                     break;
             case 4: posJ4.x = 11500;
                     posJ4.y = 1750;
-                    posJ4.z += -100;
+                    //posJ4.z += -100;
                     switch(carta) {
                         case 1: goCarta1.transform.position = posJ4;
                                 //carta1.transform.position = posicion;

@@ -511,11 +511,11 @@ public class LOG_Ronda : MonoBehaviour {
             ui.apuesta.desactivarBtnTrucoNo();
             if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Truco")
                 puntos = 3;
-            else if (ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "retruco")
+            else if (ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Retruco")
                 puntos = 6;
-            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "vale 9")
+            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Vale 9")
                 puntos = 9;
-            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "vale partida")
+            else if(ui.apuesta.BtnTruco.GetComponentInChildren<Text>().text == "Vale Partida")
                 puntos = 24;
         }
         else{
