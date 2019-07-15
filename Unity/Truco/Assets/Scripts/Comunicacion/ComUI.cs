@@ -29,7 +29,15 @@ public  class ComUI : MonoBehaviour {
             List<string> cartasRepartidas = new List<string>();
 
             cartasRepartidas = log.ronda.repartirCartasAleatorio();
-           
+            yield return new WaitForSecondsRealtime(1);
+
+            com.REPARTIENDO_CARTAS(
+                "A",
+                cartasRepartidas[0],
+                cartasRepartidas[1],
+                cartasRepartidas[2]
+            );
+
             yield return new WaitForSecondsRealtime(1);
 
             com.REPARTIENDO_CARTAS(
@@ -71,8 +79,12 @@ public  class ComUI : MonoBehaviour {
             com.VIRA(
                 cartasRepartidas[12]
             );
+            
 
             log.ronda.activarJugadores(log.partida.mano);
+            ui.mesa.jugador1.carta1.mostrarCarta();
+            ui.mesa.jugador1.carta2.mostrarCarta();
+            ui.mesa.jugador1.carta3.mostrarCarta();
         }
     }
     
