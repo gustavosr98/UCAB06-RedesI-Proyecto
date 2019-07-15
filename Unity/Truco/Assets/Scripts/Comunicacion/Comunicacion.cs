@@ -306,6 +306,11 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse( carta3.Substring(0, carta3.Length-1) )
             );
+            if ( log.juego.jugador == "A"){
+                ui.mesa.jugador1.carta1.mostrarCarta();
+                ui.mesa.jugador1.carta2.mostrarCarta();
+                ui.mesa.jugador1.carta3.mostrarCarta();
+            }            
         } else if (player == "B") {
             ui.mesa.jugador2.asignarCartas(
                 carta1.Substring(carta1.Length-1,1),
@@ -315,6 +320,13 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
+
+            if (log.juego.jugador == "B")
+            {
+                ui.mesa.jugador2.carta1.mostrarCarta();
+                ui.mesa.jugador2.carta2.mostrarCarta();
+                ui.mesa.jugador2.carta3.mostrarCarta();
+            }
         } else if (player == "C") {
             ui.mesa.jugador3.asignarCartas(
                 carta1.Substring(carta1.Length-1,1),
@@ -324,8 +336,15 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta3.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
+            
+            if (log.juego.jugador == "C")
+            {
+                ui.mesa.jugador3.carta1.mostrarCarta();
+                ui.mesa.jugador3.carta2.mostrarCarta();
+                ui.mesa.jugador3.carta3.mostrarCarta();
+            }
 
-       }   else if (player == "D") {
+        }   else if (player == "D") {
             ui.mesa.jugador4.asignarCartas(
                 carta1.Substring(carta1.Length-1,1),
                 int.Parse(carta1.Substring(0, carta1.Length-1)),
@@ -334,7 +353,14 @@ public class Comunicacion : MonoBehaviour {
                 carta3.Substring(carta1.Length-1,1),
                 int.Parse(carta3.Substring(0, carta3.Length-1))
             );
-       }
+
+            if (log.juego.jugador == "D")
+            {
+                ui.mesa.jugador4.carta1.mostrarCarta();
+                ui.mesa.jugador4.carta2.mostrarCarta();
+                ui.mesa.jugador4.carta3.mostrarCarta();
+            }
+        }
     }
     void doVIRA(string mensajeBin){
         Debug.Log(" <--- doVIRA : " + mensajeBin);
