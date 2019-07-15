@@ -100,17 +100,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1); 
                 if(personaGanador == "1"){
                     log.partida.mano = "A";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }
                 else {
                     log.partida.mano = "C";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }
                 log.partida.ronda2 = "Ronda Actual";
             }
@@ -120,17 +120,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1);
                 if(personaGanador == "2"){
                     log.partida.mano = "B";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }
                 else{
                     log.partida.mano = "D";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }
                 log.partida.ronda2 = "Ronda Actual";
             }            
@@ -148,16 +148,16 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda2(log.partida.ronda2);       
                 if(personaGanador == "1"){
                     log.partida.mano = "A";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }else{
                     log.partida.mano = "C";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }   
                 log.partida.ronda3 = "Ronda Actual";
             }
@@ -167,17 +167,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda2(log.partida.ronda2);   
                 if(personaGanador == "2"){
                     log.partida.mano = "B";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }
                 else{ 
                     log.partida.mano = "D";
-                    if ( log.juego.jugador == "A")
-                    com.TURNO(
-                        ui.mesa.toNumber(log.partida.mano.ToUpper())
-                    );
+                    /*if ( log.juego.jugador == "A")
+                        com.TURNO(
+                            ui.mesa.toNumber(log.partida.mano.ToUpper())
+                        );*/
                 }  
                 log.partida.ronda3 = "Ronda Actual";
             }
@@ -221,7 +221,7 @@ public class LOG_Ronda : MonoBehaviour {
                 log.juego.terminarJuego("BD");
             }
             else {
-                log.ronda.nuevaRonda();
+                log.ronda.nuevaPartida();
             }
 
         }
@@ -230,8 +230,7 @@ public class LOG_Ronda : MonoBehaviour {
 
     }
 
-    public void nuevaRonda(){
-        log.partida.mano = "B";
+    public void nuevaPartida(){
         ui.mesa.jugador1.reiniciarJuego(1);
         ui.mesa.jugador1.reiniciarJuego(2);
         ui.mesa.jugador1.reiniciarJuego(3);
@@ -244,14 +243,16 @@ public class LOG_Ronda : MonoBehaviour {
         ui.mesa.jugador4.reiniciarJuego(1);
         ui.mesa.jugador4.reiniciarJuego(2);
         ui.mesa.jugador4.reiniciarJuego(3);
+        cartaFuerte = null;
+        log.partida.mano = "B";
         log.partida.ronda1 = "Ronda Actual";
         log.partida.ronda2 = "Por jugar";
         log.partida.ronda3 = "Por jugar";
         ui.info.set_ronda1(log.partida.ronda1);
         ui.info.set_ronda2(log.partida.ronda2);
         ui.info.set_ronda3(log.partida.ronda3);
-        cartaFuerte = null;
-        repartirCartasAleatorio();
+
+        com.comUI.repartirCartas();
     }
 
     public void crearArray() {
@@ -562,28 +563,29 @@ public class LOG_Ronda : MonoBehaviour {
             if(carta == 1){
                 pinta = ui.mesa.jugador1.carta1.pinta;
                 numero = ui.mesa.jugador1.carta1.numero;
-                revisarMasFuerte(ui.mesa.jugador1.carta1);
 
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
-                //mandar por com
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 ui.mesa.jugador1.carta1.desactivarCarta();
+                revisarMasFuerte(ui.mesa.jugador1.carta1);
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador1.carta2.pinta;
                 numero = ui.mesa.jugador1.carta2.numero;
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
-                revisarMasFuerte(ui.mesa.jugador1.carta2);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
+
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 ui.mesa.jugador1.carta2.desactivarCarta();
+                revisarMasFuerte(ui.mesa.jugador1.carta2);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador1.carta3.pinta;
                 numero = ui.mesa.jugador1.carta3.numero;
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
-                revisarMasFuerte(ui.mesa.jugador1.carta3);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
+
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
                 ui.mesa.jugador1.carta3.desactivarCarta();
+                revisarMasFuerte(ui.mesa.jugador1.carta3);
             }
         }
         else if(jugador == 2){
@@ -591,27 +593,29 @@ public class LOG_Ronda : MonoBehaviour {
             if(carta == 1){
                 pinta = ui.mesa.jugador2.carta1.pinta;
                 numero = ui.mesa.jugador2.carta1.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 revisarMasFuerte(ui.mesa.jugador2.carta1);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
-                //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador2.carta2.pinta;
                 numero = ui.mesa.jugador2.carta2.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 revisarMasFuerte(ui.mesa.jugador2.carta2);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador2.carta3.pinta;
                 numero = ui.mesa.jugador2.carta3.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
                 revisarMasFuerte(ui.mesa.jugador2.carta3);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         else if(jugador == 3){
@@ -619,27 +623,30 @@ public class LOG_Ronda : MonoBehaviour {
             if(carta == 1){
                 pinta = ui.mesa.jugador3.carta1.pinta;
                 numero = ui.mesa.jugador3.carta1.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 revisarMasFuerte(ui.mesa.jugador3.carta1);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);                
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador3.carta2.pinta;
                 numero = ui.mesa.jugador3.carta2.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 revisarMasFuerte(ui.mesa.jugador3.carta2);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador3.carta3.pinta;
                 numero = ui.mesa.jugador3.carta3.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"011");
                 revisarMasFuerte(ui.mesa.jugador3.carta3);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         else if(jugador == 4){
@@ -647,27 +654,30 @@ public class LOG_Ronda : MonoBehaviour {
             if(carta == 1){
                 pinta = ui.mesa.jugador4.carta1.pinta;
                 numero = ui.mesa.jugador4.carta1.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"001");
                 revisarMasFuerte(ui.mesa.jugador4.carta1);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
                 //mandar por com
             }
             else if(carta == 2){
                 pinta = ui.mesa.jugador4.carta2.pinta;
                 numero = ui.mesa.jugador4.carta2.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta,"010");
                 revisarMasFuerte(ui.mesa.jugador4.carta2);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
             else if(carta == 3){
                 pinta = ui.mesa.jugador4.carta3.pinta;
                 numero = ui.mesa.jugador4.carta3.numero;
+                
+                if (local) 
+                    com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta, "011");
                 ui.mesa.jugador1.carta1.desactivarCarta();
-                if (local) com.JUGAR_CARTA(log.juego.jugador.ToUpper(), numero + pinta, "011");
                 revisarMasFuerte(ui.mesa.jugador4.carta3);
-                com.JUGAR_CARTA(log.juego.jugador, numero + pinta);
             }
         }
         ui.mesa.desactivarTurno(jugador);
