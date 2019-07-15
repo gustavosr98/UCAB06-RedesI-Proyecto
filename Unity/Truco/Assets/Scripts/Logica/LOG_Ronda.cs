@@ -100,17 +100,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1); 
                 if(personaGanador == "1"){
                     log.partida.mano = "A";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }
                 else {
                     log.partida.mano = "C";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }
                 log.partida.ronda2 = "Ronda Actual";
             }
@@ -120,17 +120,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda1(log.partida.ronda1);
                 if(personaGanador == "2"){
                     log.partida.mano = "B";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }
                 else{
                     log.partida.mano = "D";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }
                 log.partida.ronda2 = "Ronda Actual";
             }            
@@ -148,16 +148,16 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda2(log.partida.ronda2);       
                 if(personaGanador == "1"){
                     log.partida.mano = "A";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }else{
                     log.partida.mano = "C";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }   
                 log.partida.ronda3 = "Ronda Actual";
             }
@@ -167,17 +167,17 @@ public class LOG_Ronda : MonoBehaviour {
                 ui.info.set_ronda2(log.partida.ronda2);   
                 if(personaGanador == "2"){
                     log.partida.mano = "B";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }
                 else{ 
                     log.partida.mano = "D";
-                    /*if ( log.juego.jugador == "A")
+                    if ( log.juego.jugador == "A")
                         com.TURNO(
                             ui.mesa.toNumber(log.partida.mano.ToUpper())
-                        );*/
+                        );
                 }  
                 log.partida.ronda3 = "Ronda Actual";
             }
@@ -194,14 +194,11 @@ public class LOG_Ronda : MonoBehaviour {
                 VicAC ++;
                 log.partida.ronda3 = "AC";
                 ui.info.set_ronda3(log.partida.ronda3);  
-                       
-                
             }
             else if (personaGanador == "2" || personaGanador == "4"){
                 VicBD ++;
                 log.partida.ronda3 = "BD";
                 ui.info.set_ronda3(log.partida.ronda3);  
-           
             }
             
             if (VicAC > VicBD){
@@ -210,9 +207,10 @@ public class LOG_Ronda : MonoBehaviour {
             else if (VicAC < VicBD){
                 log.juego.ptsBD += puntos;                
             }
+
             ui.info.set_ptsAC(log.juego.ptsAC);
             ui.info.set_ptsBD(log.juego.ptsBD);
-            Debug.Log(log.juego.ptsAC);
+            
             if (log.juego.ptsAC >= 24) {
                 log.juego.terminarJuego("AC");
                 // com.enviar(HAY GANADOR)
@@ -231,18 +229,8 @@ public class LOG_Ronda : MonoBehaviour {
     }
 
     public void nuevaPartida(){
-        ui.mesa.jugador1.reiniciarJuego(1);
-        ui.mesa.jugador1.reiniciarJuego(2);
-        ui.mesa.jugador1.reiniciarJuego(3);
-        ui.mesa.jugador2.reiniciarJuego(1);
-        ui.mesa.jugador2.reiniciarJuego(2);
-        ui.mesa.jugador2.reiniciarJuego(3);
-        ui.mesa.jugador3.reiniciarJuego(1);
-        ui.mesa.jugador3.reiniciarJuego(2);
-        ui.mesa.jugador3.reiniciarJuego(3);
-        ui.mesa.jugador4.reiniciarJuego(1);
-        ui.mesa.jugador4.reiniciarJuego(2);
-        ui.mesa.jugador4.reiniciarJuego(3);
+        ui.mesa.reiniciarJuego();
+
         cartaFuerte = null;
         log.partida.mano = "B";
         log.partida.ronda1 = "Ronda Actual";
@@ -251,8 +239,7 @@ public class LOG_Ronda : MonoBehaviour {
         ui.info.set_ronda1(log.partida.ronda1);
         ui.info.set_ronda2(log.partida.ronda2);
         ui.info.set_ronda3(log.partida.ronda3);
-
-        com.comUI.repartirCartas();
+        //if (log.juego.jugador === "")
     }
 
     public void crearArray() {
@@ -403,25 +390,14 @@ public class LOG_Ronda : MonoBehaviour {
 
         carta = generarRandom();
         ui.vira.darValor(carta.pinta,carta.numero);
-        // LOCAL
+        cartasRepartidas.Add(ui.vira.numero + ui.vira.pinta);
+        
         permitirJugada( log.partida.mano.ToUpper() );
-        // RED
         com.TURNO(
             ui.mesa.toNumber( log.partida.mano.ToUpper() )
         );
-        cartasRepartidas.Add(ui.vira.numero + ui.vira.pinta);
 
         return cartasRepartidas;
-
-
-        /*
-            com.ronda.darCartas("A",
-                ui.mesa.jugador1.carta1.pinta, ui.mesa.jugador1.carta1.numero,
-                ui.mesa.jugador1.carta2.pinta, ui.mesa.jugador1.carta2.numero,
-                ui.mesa.jugador1.carta3.pinta, ui.mesa.jugador1.carta3.numero
-            )
-            com.ronda.darCartas("B"...)
-        */
     }
 
     public void activarJugadores(string x){
