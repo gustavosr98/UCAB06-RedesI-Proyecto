@@ -31,9 +31,9 @@ public class Comunicacion : MonoBehaviour {
     public Button btnEnviar, btnConectar, btnReal, btnEmpezar;
     public Dropdown dropPuertosA, dropPuertosB, dropVelocidad, dropJugador;
     public InputField inEnviar, inRecibido;
+    public ComUI comUI;
 
 
-   
     void Start(){
         strBufferIn = "";
         strBufferOut = "";
@@ -58,6 +58,8 @@ public class Comunicacion : MonoBehaviour {
 
         inEnviar = GameObject.Find("InEnviar").GetComponent<InputField>();
         inRecibido = GameObject.Find("InRecibido").GetComponent<InputField>();
+
+        comUI = gameObject.GetComponent<ComUI>();
 
         log = GameObject.Find("Logica").GetComponent<Logica>();
         dropJugador = GameObject.Find("DropJugador").GetComponent<Dropdown>();
